@@ -1,0 +1,4 @@
+20261028
+I want to develop vector further. I'd like to use it as a repository of patterns and textures from around the world. I want to break down the patterns into the mathematical algorithms that produce precise vectors that can be exported as svgs, view contextual historical details, view the math to reproduce them, provide some editing tools to control properties like size, color, thickness, fills, tiling, density, etc. This requires a ui overhaul that utilizes a workspace shell, gallery, and appropriate tabs with property panel with controls, and ways to view the other details.
+
+Only a few patterns are visually accurate to their references. Asonaha, kikko, uroko are quite good, but yagusuri, seigaiha, karakusa, shippo are still way off.
