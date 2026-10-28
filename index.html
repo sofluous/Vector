@@ -345,7 +345,7 @@
       <div class="control">
         <label>Pattern formulae</label>
         <button id="openFormula" type="button">Open Formula Info</button>
-        <div class="value">Construction notes for Asanoha, Shippo, Seigaiha</div>
+        <div class="value">Construction notes for Asanoha, Shippo, Seigaiha, Karakusa</div>
       </div>
     </section>
     <section id="patternGallery" class="gallery" aria-label="Tileable pattern gallery"></section>
@@ -368,6 +368,7 @@
         <button class="formula-tab active" data-formula="asanoha" type="button">Asanoha</button>
         <button class="formula-tab" data-formula="shippo" type="button">Shippo</button>
         <button class="formula-tab" data-formula="seigaiha" type="button">Seigaiha</button>
+        <button class="formula-tab" data-formula="karakusa" type="button">Karakusa</button>
       </div>
       <section class="formula-body active" data-formula-body="asanoha">
         <svg class="mini-diagram" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
@@ -385,35 +386,59 @@ Draw the explicit line set inside each connected hex.
 Tile centers on hex lattice with alternating row offset.</pre>
       </section>
       <section class="formula-body" data-formula-body="shippo">
-        <svg class="mini-diagram" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" stroke="#2a5db1" stroke-width="1.4" opacity="0.5">
-            <circle cx="40" cy="40" r="28"/><circle cx="80" cy="40" r="28"/>
-            <circle cx="40" cy="80" r="28"/><circle cx="80" cy="80" r="28"/>
-          </g>
-          <g fill="#2a5db1">
-            <path d="M60 40 A28 28 0 0 1 80 60 A28 28 0 0 1 60 80 A28 28 0 0 1 40 60 A28 28 0 0 1 60 40 Z"/>
+        <svg class="mini-diagram" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four diagonal lens petals separated by small gaps at the center and corners">
+          <g fill="#2a5db1" stroke="none" transform="translate(10 10)">
+            <path d="M2.0435 2.0435 A48 48 0 0 1 47.9565 47.9565 A48 48 0 0 1 2.0435 2.0435 Z"/>
+            <path d="M97.9565 2.0435 A48 48 0 0 1 52.0435 47.9565 A48 48 0 0 1 97.9565 2.0435 Z"/>
+            <path d="M97.9565 97.9565 A48 48 0 0 1 52.0435 52.0435 A48 48 0 0 1 97.9565 97.9565 Z"/>
+            <path d="M2.0435 97.9565 A48 48 0 0 1 47.9565 52.0435 A48 48 0 0 1 2.0435 97.9565 Z"/>
           </g>
         </svg>
-        <pre>Use the previous accurate overlap construction, then rotate orientation:
-1) Quarter-offset circle lattice, p = u/2.
-2) Fill side-overlap lens intersections.
-3) Apply rotate(45deg) around tile center.
-This preserves motif math while rotating center whitespace to diamond orientation.</pre>
+        <pre>Reference-based diagonal lens petals (idealized reconstruction):
+Square tile: u by u. Circle radius r = 0.48u.
+Circle centers are the four edge midpoints.
+Each adjacent circle pair intersects in one diagonal lens.
+Tip inset t = u/4 - sqrt(r*r - u*u/8)/sqrt(2).
+For the top-left lens, endpoints are (t,t) and (u/2-t,u/2-t).
+Join them with two minor circular arcs of radius r.
+Construct the other three lenses symmetrically; do not rotate the tile.
+Fill in the line color, without guide circles, outlines, or background masks.
+Stroke and accent controls do not affect this filled motif.
+Radius and tip gaps are reference estimates, not historical constants.</pre>
       </section>
       <section class="formula-body" data-formula-body="seigaiha">
-        <svg class="mini-diagram" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <svg class="mini-diagram" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four-ring wave fans, with foreground fans hiding the lower rear arcs">
           <g fill="none" stroke="#2a5db1" stroke-width="1.3">
-            <path d="M10 95 A25 25 0 0 1 60 95"/><path d="M15 95 A20 20 0 0 1 55 95"/><path d="M20 95 A15 15 0 0 1 50 95"/>
-            <path d="M60 95 A25 25 0 0 1 110 95"/><path d="M65 95 A20 20 0 0 1 105 95"/><path d="M70 95 A15 15 0 0 1 100 95"/>
-            <path d="M35 70 A25 25 0 0 1 85 70"/><path d="M40 70 A20 20 0 0 1 80 70"/><path d="M45 70 A15 15 0 0 1 75 70"/>
+            <path d="M35 60 A25 25 0 0 1 85 60 M41 60 A19 19 0 0 1 79 60 M47 60 A13 13 0 0 1 73 60 M53 60 A7 7 0 0 1 67 60"/>
+            <path d="M10 72.5 A25 25 0 0 1 60 72.5 Z M60 72.5 A25 25 0 0 1 110 72.5 Z" fill="white" stroke="none"/>
+            <path d="M10 72.5 A25 25 0 0 1 60 72.5 M16 72.5 A19 19 0 0 1 54 72.5 M22 72.5 A13 13 0 0 1 48 72.5 M28 72.5 A7 7 0 0 1 42 72.5"/>
+            <path d="M60 72.5 A25 25 0 0 1 110 72.5 M66 72.5 A19 19 0 0 1 104 72.5 M72 72.5 A13 13 0 0 1 98 72.5 M78 72.5 A7 7 0 0 1 92 72.5"/>
           </g>
         </svg>
-        <pre>Triangular-lattice concentric arcs:
-e1 = (sqrt(3)k, 0), e2 = (sqrt(3)k/2, k/2)
-C(i,j) = i*e1 + j*e2 + offset
-t(rr) = atan((3-rr^2)/(sqrt(3)+sqrt(rr^2*(4-rr^2))))
-Draw arcs from +t to pi-t.
-Ring count scales with reps so low reps remain legible.</pre>
+        <pre>Reference-based four-ring fans (idealized reconstruction):
+R = u/2; radii = R * [1, 0.76, 0.52, 0.28]
+C(i,j) = (2Ri + (j mod 2)R, jR/2)
+Draw upper semicircles, sweeping left to right.
+Paint rows back to front: a background-filled outer fan
+hides the lower arcs behind it. Do not stroke its baseline.
+Rectangular repeat: width 2R, height R (two rows).
+Effective stroke = min(requested stroke, 0.45 * 0.24R).
+Ring count stays fixed when repetition changes.
+Ratios are estimated from the supplied reference, not historical constants.</pre>
+      </section>
+      <section class="formula-body" data-formula-body="karakusa">
+        <svg id="karakusaDiagram" class="mini-diagram" viewBox="0 0 278 179" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Idealized connected vine repeat with attached inward curls and pointed leaves"></svg>
+        <pre>Idealized connected-vine reconstruction; not an exact tracing.
+W = 4u; H = W * 179/278 (estimated reference proportions).
+Two periodic cubic stems form the connected backbone.
+Eight curls attach at evaluated stem points with matching tangent directions.
+Spiral radius rho(t) = R * (1 - 0.92t*t).
+Angle theta(t) = theta0 + winding * 2*pi*turns*t.
+Convert short spiral intervals to cubic Hermite segments.
+Pointed leaves share their base points with the stems.
+Match stem positions and derivatives across each repeated boundary.
+Effective stroke = min(requested stroke, 0.018W); accent is unused.
+Arrangement and proportions remain approximate; historical context is unverified.</pre>
       </section>
     </div>
   </div>
@@ -563,45 +588,36 @@ Ring count scales with reps so low reps remain legible.</pre>
       {
         id: "seigaiha",
         name: "Seigaiha",
-        desc: "Concentric semicircle waves with half-offset rows.",
+        desc: "Four-ring wave fans with staggered, overlapping rows. Stroke is capped at 45% of ring spacing.",
         tile(unit, s) {
-          const u = unit;
-          const k = u / 3;
-          const e1x = SQRT3 * k;
-          const e2x = (SQRT3 / 2) * k;
-          const e2y = 0.5 * k;
-          const w = 2 * e1x;
-          const h = 4 * e2y;
-          const yOffset = h * 0.92;
-          const ringCount = Math.max(2, Math.min(5, Math.round((s.reps || 12) / 6) + 1));
-          let d = "";
-
-          function opening(rr) {
-            const num = 3 - rr * rr;
-            const den = SQRT3 + Math.sqrt(rr * rr * (4 - rr * rr));
-            return Math.atan(num / den);
+          if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(s.stroke) || s.stroke <= 0) {
+            throw new RangeError("Seigaiha unit and stroke must be positive finite numbers.");
           }
+          const radius = unit / 2;
+          const ringStep = radius * 0.24;
+          const stroke = Math.min(s.stroke, ringStep * 0.45);
+          let fans = "";
 
-          for (let i = -1; i <= 3; i += 1) {
-            for (let j = -2; j <= 5; j += 1) {
-              const cx = i * e1x + j * e2x;
-              const cy = j * e2y + yOffset;
-              for (let m = 0; m < ringCount; m += 1) {
-                const rr = 2 - (m * (1 / Math.max(1, ringCount - 1)));
-                const r = rr * k;
-                const t = opening(rr);
-                const sx = cx + r * Math.cos(t);
-                const sy = cy + r * Math.sin(t);
-                const ex = cx + r * Math.cos(Math.PI - t);
-                const ey = cy + r * Math.sin(Math.PI - t);
-                d += `M ${n(sx)} ${n(sy)} A ${n(r)} ${n(r)} 0 0 0 ${n(ex)} ${n(ey)} `;
+          // Paint back to front: each filled fan hides the lower arcs behind it.
+          // The last row starts below the tile but its stroke reaches the bottom edge.
+          for (let row = 0; row <= 4; row += 1) {
+            const cy = row * radius / 2;
+            const offset = row % 2 ? radius : 0;
+            for (let col = -1; col <= 1; col += 1) {
+              const cx = col * unit + offset;
+              const silhouette = `${arcPath(cx, cy, radius, true)} Z`;
+              let arcs = "";
+              for (let ring = 0; ring < 4; ring += 1) {
+                arcs += `${arcPath(cx, cy, radius - ring * ringStep, true)} `;
               }
+              fans += `<path d="${silhouette}" fill="${s.bg}" stroke="none"/>
+                <path d="${arcs.trim()}" fill="none" stroke="${s.line}" stroke-width="${n(stroke)}"/>`;
             }
           }
           return {
-            w: n(w),
-            h: n(h),
-            markup: `<path d="${d.trim()}" stroke="${s.line}" stroke-width="${s.stroke}" fill="none"/>`
+            w: n(unit),
+            h: n(radius),
+            markup: fans
           };
         }
       },
@@ -626,47 +642,31 @@ Ring count scales with reps so low reps remain legible.</pre>
       {
         id: "shippo",
         name: "Shippo",
-        desc: "Interlocking equal circles creating the seven-treasures petals.",
+        desc: "Four diagonal equal-circle lens petals with open tip gaps. Filled motif; stroke and accent are unused.",
         tile(unit, s) {
-          const u = unit;
-          const p = u / 2;
-          const r = u * 0.36;
-          const x0 = u / 4;
-          const y0 = u / 4;
-          let defs = "";
-          let petals = "";
-          let idCounter = 0;
-
-          function addLens(x1, y1, x2, y2) {
-            const id = `shippo_clip_${idCounter++}`;
-            defs += `<clipPath id="${id}"><circle cx="${n(x2)}" cy="${n(y2)}" r="${n(r)}"/></clipPath>`;
-            petals += `<circle cx="${n(x1)}" cy="${n(y1)}" r="${n(r)}" clip-path="url(#${id})"/>`;
+          if (!Number.isFinite(unit) || unit <= 0) {
+            throw new RangeError("Shippo unit must be a positive finite number.");
           }
+          const radius = unit * 0.48;
+          const center = unit / 2;
+          // Intersections of circles centered on adjacent edge midpoints.
+          // Work in unit ratios to avoid squaring large coordinates.
+          const inset = unit * (0.25 - Math.sqrt(0.48 ** 2 - 0.125) / Math.SQRT2);
+          let petals = "";
 
-          // Quarter-stacked circle centers on a half-step lattice.
-          for (let row = -1; row <= 3; row += 1) {
-            for (let col = -1; col <= 3; col += 1) {
-              const cx = x0 + col * p;
-              const cy = y0 + row * p;
-              addLens(cx, cy, cx + p, cy); // side overlap (original)
-              addLens(cx, cy, cx, cy + p); // side overlap (original)
-            }
+          for (const [cornerX, cornerY] of [[0, 0], [unit, 0], [unit, unit], [0, unit]]) {
+            const sx = cornerX === 0 ? 1 : -1;
+            const sy = cornerY === 0 ? 1 : -1;
+            const x1 = n(cornerX + sx * inset);
+            const y1 = n(cornerY + sy * inset);
+            const x2 = n(center - sx * inset);
+            const y2 = n(center - sy * inset);
+            petals += `<path d="M ${x1} ${y1} A ${n(radius)} ${n(radius)} 0 0 1 ${x2} ${y2} A ${n(radius)} ${n(radius)} 0 0 1 ${x1} ${y1} Z"/>`;
           }
           return {
-            w: n(u),
-            h: n(u),
-            markup: `
-              <defs>${defs}</defs>
-              <g fill="${s.line}" transform="rotate(45 ${n(u / 2)} ${n(u / 2)})">
-                ${petals}
-              </g>
-              <g stroke="${s.accent}" stroke-width="${n(s.stroke * 0.25)}" fill="none" opacity="0.5">
-                <circle cx="${n(x0)}" cy="${n(y0)}" r="${n(r)}"/>
-                <circle cx="${n(x0 + p)}" cy="${n(y0)}" r="${n(r)}"/>
-                <circle cx="${n(x0)}" cy="${n(y0 + p)}" r="${n(r)}"/>
-                <circle cx="${n(x0 + p)}" cy="${n(y0 + p)}" r="${n(r)}"/>
-              </g>
-            `
+            w: n(unit),
+            h: n(unit),
+            markup: `<g fill="${s.line}" stroke="none">${petals}</g>`
           };
         }
       },
@@ -701,27 +701,106 @@ Ring count scales with reps so low reps remain legible.</pre>
       {
         id: "karakusa",
         name: "Karakusa",
-        desc: "Continuous arabesque vines with repeating curled tendrils.",
+        desc: "Idealized connected vines, inward curls, and pointed leaves. Stroke capped at 1.8% of motif width; accent unused.",
         tile(unit, s) {
-          const u = unit;
-          const w = 2 * u;
-          const h = 2 * u;
-          const curls = [];
-          for (let row = -1; row <= 2; row += 1) {
-            for (let col = -1; col <= 2; col += 1) {
-              const cx = col * u + ((row % 2) ? u / 2 : 0);
-              const cy = row * u;
-              curls.push(`
-                <path d="M ${n(cx - u * 0.45)} ${n(cy)} C ${n(cx - u * 0.1)} ${n(cy - u * 0.45)} ${n(cx + u * 0.25)} ${n(cy + u * 0.35)} ${n(cx + u * 0.45)} ${n(cy)}"/>
-                <path d="M ${n(cx + u * 0.45)} ${n(cy)} C ${n(cx + u * 0.05)} ${n(cy - u * 0.2)} ${n(cx + u * 0.08)} ${n(cy + u * 0.18)} ${n(cx + u * 0.24)} ${n(cy + u * 0.03)}"/>
-                <path d="M ${n(cx - u * 0.1)} ${n(cy + u * 0.05)} C ${n(cx - u * 0.35)} ${n(cy + u * 0.35)} ${n(cx - u * 0.35)} ${n(cy + u * 0.05)} ${n(cx - u * 0.2)} ${n(cy + u * 0.12)}"/>
-              `);
+          if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(s.stroke) || s.stroke <= 0) {
+            throw new RangeError("Karakusa unit and stroke must be positive finite numbers.");
+          }
+          const width = 4 * unit;
+          const height = 179 / 278;
+          const horizontal = [
+            [[0, 0.36], [0.10, 0.36], [0.15, 0.44], [0.30, 0.40]],
+            [[0.30, 0.40], [0.45, 0.36], [0.49, 0.24], [0.65, 0.28]],
+            [[0.65, 0.28], [0.81, 0.32], [0.90, 0.36], [1, 0.36]]
+          ];
+          const vertical = [
+            [[0.30, 0.40], [0.19, 0.46], [0.29, 0.60], [0.45, 0.60]],
+            [[0.45, 0.60], [0.61, 0.60], [0.41, 0.34 + height], [0.30, 0.40 + height]]
+          ];
+          const point = p => n(p[0] * width) + " " + n(p[1] * width);
+          const cubic = c => "C " + c.slice(1).map(point).join(" ");
+          const curvePath = curves => "M " + point(curves[0][0]) + " " + curves.map(cubic).join(" ");
+          function at(c, t) {
+            const q = 1 - t;
+            return [0, 1].map(axis => q ** 3 * c[0][axis] + 3 * q * q * t * c[1][axis] + 3 * q * t * t * c[2][axis] + t ** 3 * c[3][axis]);
+          }
+          function tangent(c, t) {
+            return [0, 1].map(axis => 3 * (1 - t) ** 2 * (c[1][axis] - c[0][axis]) + 6 * (1 - t) * t * (c[2][axis] - c[1][axis]) + 3 * t * t * (c[3][axis] - c[2][axis]));
+          }
+          function offset(p, direction, distance) {
+            const length = Math.hypot(...direction);
+            return p.map((value, axis) => value + direction[axis] * distance / length);
+          }
+          const parts = [];
+          function addPart(markup, points) {
+            parts.push({ markup, minX: Math.min(...points.map(p => p[0])), maxX: Math.max(...points.map(p => p[0])), minY: Math.min(...points.map(p => p[1])), maxY: Math.max(...points.map(p => p[1])) });
+          }
+          addPart('<path data-part="horizontal" d="' + curvePath(horizontal) + '"/>', horizontal.flat());
+          addPart('<path data-part="vertical" d="' + curvePath(vertical) + '"/>', vertical.flat());
+          // Source curve, anchor parameter, center, radius, angle, winding, turns.
+          const branches = [
+            [horizontal[0], 0.50, [0.11, 0.18], 0.145, Math.PI / 2, 1, 1.55],
+            [horizontal[1], 0.25, [0.40, 0.16], 0.145, Math.PI / 2, 1, 1.45],
+            [horizontal[2], 0.55, [0.79, 0.12], 0.160, Math.PI / 2, -1, 1.55],
+            [horizontal[0], 0.15, [0.10, 0.54], 0.110, -Math.PI / 2, 1, 1.40],
+            [horizontal[1], 0.65, [0.60, 0.48], 0.140, -Math.PI / 2, -1, 1.50],
+            [horizontal[2], 0.92, [0.88, 0.53], 0.110, -Math.PI / 2, -1, 1.40],
+            [vertical[1], 0.65, [0.59, 0.10 + height], 0.065, Math.PI / 2, 1, 1.35],
+            [vertical[1], 0.25, [0.61, 0.66], 0.055, Math.PI, 1, 1.30]
+          ];
+          branches.forEach(([source, anchorT, center, radius, angle, winding, turns], index) => {
+            const omega = winding * 2 * Math.PI * turns;
+            function spiral(t) {
+              const theta = angle + omega * t;
+              const r = radius * (1 - 0.92 * t * t);
+              const dr = -1.84 * radius * t;
+              return {
+                p: [center[0] + r * Math.cos(theta), center[1] + r * Math.sin(theta)],
+                d: [dr * Math.cos(theta) - r * omega * Math.sin(theta), dr * Math.sin(theta) + r * omega * Math.cos(theta)]
+              };
+            }
+            const anchor = at(source, anchorT);
+            const first = spiral(0);
+            const lead = Math.min(0.06, Math.hypot(first.p[0] - anchor[0], first.p[1] - anchor[1]) * 0.45);
+            const curves = [[anchor, offset(anchor, tangent(source, anchorT), lead), offset(first.p, first.d, -lead), first.p]];
+            // Cubic Hermite approximation: at most 30 degrees per interval.
+            const steps = Math.ceil(turns * 12);
+            for (let step = 0; step < steps; step += 1) {
+              const a = spiral(step / steps);
+              const b = spiral((step + 1) / steps);
+              const dt = 1 / steps;
+              curves.push([a.p, a.p.map((v, axis) => v + a.d[axis] * dt / 3), b.p.map((v, axis) => v - b.d[axis] * dt / 3), b.p]);
+            }
+            addPart('<path data-part="curl-' + index + '" d="' + curvePath(curves) + '"/>', curves.flat());
+          });
+          const leaves = [[horizontal[0], 0.74, -1], [horizontal[1], 0.13, -1], [horizontal[1], 0.80, 1], [horizontal[2], 0.30, -1], [horizontal[2], 0.75, 1], [vertical[0], 0.55, 1], [vertical[1], 0.50, -1], [vertical[1], 0.85, 1]];
+          leaves.forEach(([source, t, side], index) => {
+            const base = at(source, t);
+            const direction = tangent(source, t);
+            const angle = Math.atan2(direction[1], direction[0]) + side * 0.90;
+            const axis = [Math.cos(angle), Math.sin(angle)];
+            const normal = [-axis[1], axis[0]];
+            const tip = offset(base, axis, 0.060);
+            const middle = offset(base, axis, 0.030);
+            const a = offset(middle, normal, 0.018);
+            const b = offset(middle, normal, -0.018);
+            addPart('<path data-part="leaf-' + index + '" fill="' + s.line + '" stroke="none" d="M ' + point(base) + ' Q ' + point(a) + ' ' + point(tip) + ' Q ' + point(b) + ' ' + point(base) + ' Z"/>', [base, a, tip, b]);
+          });
+          let copies = "";
+          const stroke = Math.min(s.stroke, width * 0.018);
+          const margin = stroke / (2 * width);
+          // Control-point hulls conservatively exclude invisible neighboring paths.
+          // Remaining copies include the connector and curls crossing cell edges.
+          for (let row = -1; row <= 1; row += 1) {
+            for (let col = -1; col <= 1; col += 1) {
+              const visible = parts.filter(p => p.maxX + col + margin >= 0 && p.minX + col - margin <= 1 && p.maxY + row * height + margin >= 0 && p.minY + row * height - margin <= height);
+              if (visible.length) copies += '<g data-motif="' + col + ',' + row + '" transform="translate(' + n(col * width) + ' ' + n(row * height * width) + ')">' + visible.map(p => p.markup).join("") + '</g>';
             }
           }
           return {
-            w: n(w),
-            h: n(h),
-            markup: `<g stroke="${s.line}" stroke-width="${s.stroke}" fill="none" stroke-linecap="round">${curls.join("")}</g>`
+            w: n(width),
+            h: n(height * width),
+            markup: '<g fill="none" stroke="' + s.line + '" stroke-width="' + n(stroke) + '" stroke-linecap="round" stroke-linejoin="round">' + copies + '</g>'
           };
         }
       },
@@ -1221,6 +1300,7 @@ Ring count scales with reps so low reps remain legible.</pre>
     renderProjectLogoGallery();
     renderStaticGallery();
     syncPatternState();
+    document.getElementById("karakusaDiagram").innerHTML = patternDefs.find(p => p.id === "karakusa").tile(69.5, { line: "#2a5db1", stroke: 2.8 }).markup;
   </script>
 </body>
 </html>

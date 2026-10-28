@@ -1,11 +1,14 @@
 # Roadmap
 
-Plan established on 2026-10-28 from the scratchpad and source review. User authorized proceeding. Initial reference audit and Yagasuri correction are implemented; the workspace and remaining generator corrections are still planned.
+Plan established on 2026-10-28 from the scratchpad and source review. User authorized proceeding. The reference audit and Yagasuri/Seigaiha/Shippo candidates are implemented; Karakusa now has an experimental connected construction, with visual reference fitting still open. Workspace redesign and generator module separation remain planned.
 
 ## Progress on 2026-10-28
 - Completed the initial [nine-pattern visual audit](REFERENCE_AUDIT.md), preserving pre-change SVGs/settings and comparison captures. Provenance/rights and exact repeat specifications for other patterns remain open.
 - Implemented the [Yagasuri construction pilot](YAGASURI_CONSTRUCTION.md); five focused tests pass, including unchanged baseline output for the other eight generators. Candidate visual proportions remain open for review.
-- Next implementation task: specify Seigaiha's fan geometry, radius increments, stagger, and occlusion before correcting its generator. Module separation remains pending; do not treat this pilot as completion of all Stage 2 work.
+- Implemented [Seigaiha's fan construction](SEIGAIHA_CONSTRUCTION.md), including fixed ring count, row stagger, background occlusion, bounded stroke, updated formula notes, and repeat tests. The combined suite has twelve passing tests. Edge checks cover live controls, intercepted SVG download generation, and the formula panel under three theme selections.
+- Implemented [Shippo's direct-lens construction](SHIPPO_CONSTRUCTION.md), removing rotated repeat geometry, clip IDs, and guide outlines. The combined suite has 19 passing tests; Edge checks cover controls, intercepted copy/download content, and the formula panel under three theme selections.
+- Implemented [Karakusa's experimental connected graph](KARAKUSA_CONSTRUCTION.md), including periodic cubic stems, tangent-attached spiral branches, filled leaves, hull-pruned neighboring paths, stroke bounds, and a formula tab. The combined suite has 27 passing tests; Edge checks cover interactions and repeated-field raster coverage under three themes.
+- Next priority: refine Karakusa's arrangement and curl/branch shapes against the reference before marking it reference-matched. Then separate generator/validation/serialization modules and add reference palettes/presets for Ichimatsu and Mameshibori. Preserve user-favored baselines. These candidates do not complete Stage 2 acceptance.
 
 ## Stage 1: Reference and accuracy audit
 - Inventory all nine patterns against `_references/Japanese/`, recording intended variants, provenance, rights uncertainty, repeat cells, and construction rules.
@@ -55,4 +58,4 @@ Exit: new collections fit existing contracts without special-case UI branches; a
 | Shareable parameter recipes | Reproduces variants without storing SVG blobs | After preset versioning |
 
 ## Recommended next task and review decisions
-Continue with Seigaiha construction and a scoped correction, followed by Shippo; Karakusa needs a larger motif/topology specification. Preserve legacy galleries and defer saved presets under the recommended defaults until workspace requirements are reviewed. Keep UI rebuilding behind geometry contracts and acceptance gates.
+Review/refine the experimental Karakusa composition next; its connected topology is tested but its visual arrangement still differs from the reference. Follow with generator module separation and reference preset work. Preserve legacy galleries and defer saved presets under the recommended defaults until workspace requirements are reviewed. Keep UI rebuilding behind geometry contracts and acceptance gates.

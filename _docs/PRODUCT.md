@@ -1,15 +1,18 @@
 # Product
 
 ## Goal and status
-Become a curated repository of patterns and textures from around the world: understand their context and mathematical construction, edit their properties, and export precise, editable SVGs. This direction comes from [the scratchpad](data/scratchpad.md). The workspace/data contracts below remain proposed; the reference audit and first Yagasuri correction have started implementation.
+Become a curated repository of patterns and textures from around the world: understand their context and mathematical construction, edit their properties, and export precise, editable SVGs. This direction comes from [the scratchpad](data/scratchpad.md). The workspace/data contracts below remain proposed; the reference audit, three generator corrections, and an experimental Karakusa reconstruction are implemented candidates awaiting final reference acceptance.
 
 ## Current implementation
 - Dependency-free browser page in `index.html` with inline catalog, generators, state, and rendering.
 - Nine Japanese pattern generators: Asanoha, Yagasuri, Seigaiha, Ichimatsu, Shippo, Kikko, Karakusa, Uroko, and Mameshibori.
 - Global controls for repetition, stroke width, line/accent/background colors, and square frame size; copy/download SVG actions.
-- Formula panels for Asanoha, Shippo, and Seigaiha; separate static vector and project logo galleries.
+- Formula panels for Asanoha, Shippo, Seigaiha, and Karakusa; separate static vector and project logo galleries.
 - Reference images and saved research links in `_references/Japanese/`. Their presence does not establish attribution, accuracy, or reuse permission.
-- A [nine-pattern reference audit](REFERENCE_AUDIT.md) and [Yagasuri construction pilot](YAGASURI_CONSTRUCTION.md), with a corrected paired-vane/staggered-repeat generator and dependency-free Node regression tests. Other generators remain unchanged.
+- A [nine-pattern reference audit](REFERENCE_AUDIT.md) and [Yagasuri construction pilot](YAGASURI_CONSTRUCTION.md), with a corrected paired-vane/staggered-repeat generator and dependency-free Node regression tests.
+- A [Seigaiha construction correction](SEIGAIHA_CONSTRUCTION.md): four-ring fans with foreground occlusion, a rectangular two-row repeat, fixed ring count, and a documented stroke cap. Its formula panel now matches the generator.
+- A [Shippo construction correction](SHIPPO_CONSTRUCTION.md): four direct diagonal equal-circle lenses, small tip gaps, and an unrotated square repeat without clips or guide outlines. Stroke/accent controls are unused and documented.
+- An [experimental Karakusa reconstruction](KARAKUSA_CONSTRUCTION.md): periodic connected cubic stems, eight attached inward spirals, and eight pointed leaves. Geometry and seams are tested; reference arrangement still needs fitting. Effective stroke is capped and accent unused. Five remaining generators retain original audit outputs.
 
 Pattern definitions currently contain `id`, `name`, `desc`, and `tile(unit, state)`, returning width, height, and SVG markup. Export repeats this tile inside a frame. Static vectors separately use `id`, `name`, `desc`, `viewBox`, and `markup`.
 

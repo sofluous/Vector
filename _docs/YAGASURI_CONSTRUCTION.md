@@ -68,7 +68,7 @@ From the `_CODE` workspace:
 node --test _Vectors/tests/yagasuri.test.cjs
 ```
 
-The dependency-free Node tests evaluate the shipped inline generator definitions, check topology and empty spaces, compare sampled seam occupancy against an independent analytic field, test minimum/default/maximum UI sizes, reject nonpositive/non-finite units, and compare the other eight generators to captured baseline output. Samples avoid polygon boundaries where four-decimal rounding makes inside/outside classification ambiguous.
+The dependency-free Node tests evaluate the shipped inline generator definitions, check topology and empty spaces, compare sampled seam occupancy against an independent analytic field, test minimum/default/maximum UI sizes, reject nonpositive/non-finite units, and retain original baselines for five untouched generators. The later Seigaiha, Shippo, and Karakusa suites also preserve this corrected Yagasuri output against their immediate pre-change snapshots. Samples avoid polygon boundaries where four-decimal rounding makes inside/outside classification ambiguous.
 
 For manual checking, open `_Vectors/index.html`, locate Yagasuri, change repetitions/frame size and line/background colors, and inspect the paired vanes and stagger. Export SVG and open it separately. The saved SVG artifact is a construction fixture, not evidence that the clipboard/download interaction was tested.
 
@@ -78,4 +78,4 @@ For manual checking, open `_Vectors/index.html`, locate Yagasuri, change repetit
 - Geometry count is constant per tile (eight polygons); no new runtime dependencies or gallery-wide rendering changes were introduced. Performance has not been benchmarked.
 - Test extraction from inline definitions is temporary and should become direct module imports during generator separation.
 - Do not expose arbitrary slope/body/gap controls until their constraints and expected repeat behavior are specified.
-- Next: Seigaiha construction specification, then correction; preserve other patterns until their scoped tasks.
+- Subsequent work: [Seigaiha](SEIGAIHA_CONSTRUCTION.md) and [Shippo](SHIPPO_CONSTRUCTION.md) corrections are now implemented. Their suites and the later Karakusa suite preserve this corrected Yagasuri output; original baselines remain for five untouched generators. Karakusa now has an experimental connected construction; visual arrangement fitting remains open.

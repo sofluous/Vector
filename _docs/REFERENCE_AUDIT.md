@@ -20,19 +20,19 @@ Repeat descriptions below are proposed construction models inferred from the sup
 | --- | --- | --- |
 | Asanoha / `Asanoha.jpg` | Six-direction star/leaf network; triangular/hexagonal lattice, rectangular supercell spanning two staggered rows | User considers it good. Render has recognizable lattice; freeze as regression baseline. Review internal connections and proportions at normalized scale before verification. |
 | Yagasuri / `Yagasuri.jpg` | Paired long slanted vanes separated by a shaft gap; neighboring columns reverse direction and shift by half the vertical period. Two columns form a rectangular cell | Baseline bars and separate triangular caps miss the construction. Pilot correction implemented; see specification below. Visual candidate, not user-approved final. |
-| Seigaiha / `Seigaiha.jpg` | Nested rounded fans with staggered centers and overlapping/occluded lower portions; rectangular cell spans two rows | Baseline creates dense crossing arcs and small diamond openings rather than readable fans. Specify radius increments, row spacing, clipping/occlusion, and sweep direction independently of repetition count. |
+| Seigaiha / `Seigaiha.jpg` | Nested rounded fans with staggered centers and overlapping/occluded lower portions; rectangular cell spans two rows | Baseline creates dense crossing arcs and small diamond openings. Subsequent [correction](SEIGAIHA_CONSTRUCTION.md) implements fixed four-ring fans and foreground occlusion; final proportions await review. |
 | Ichimatsu / `Ichimatsu.jpg` | Alternating light/blue squares; two-by-two square parity cell | Baseline topology is recognizable; current accent fills the reference's light squares. Provide a reference palette, then review scale and parity. Texture/irregularity is out of scope. |
-| Shippo / `Shippo.jpg` | Four diagonal lens petals around light circular spaces, repeated on a square lattice | Baseline rotated lens field produces dense star/diamond shapes and extra circle outlines. Derive lens intersections and repeat basis before rotation/clipping; avoid rotating a square repeat without recomputing its period. |
+| Shippo / `Shippo.jpg` | Four diagonal lens petals around light circular spaces, repeated on a square lattice | Baseline rotated field produces dense star/diamond shapes and extra outlines. Subsequent [correction](SHIPPO_CONSTRUCTION.md) constructs direct equal-circle lenses with open tips and an unrotated square repeat; final proportions await review. |
 | Kikko / `Kikko.jpg` | Concentric hexagonal rings on staggered centers, broad blue ground and light channels; rectangular two-row supercell | User considers it good. Freeze geometry, but exact reference palette, ring count, line widths, and negative-space balance remain unverified. |
-| Karakusa / `Karakusa.jpg` | Connected sweeping stems, multiple inward curls, small leaf accents; visible larger repeated composition | Baseline is sparse disconnected curve rows. Trace a representative repeat's branch topology first, then fit curves and match edge position/tangent constraints. Exact repeat dimensions remain unresolved. |
+| Karakusa / `Karakusa.jpg` | Connected sweeping stems, multiple inward curls, small leaf accents; visible larger repeated composition | Baseline is sparse disconnected rows. A later [experimental graph](KARAKUSA_CONSTRUCTION.md) uses an estimated 278:179 composition ratio and tested periodic stems/curls/leaves. Exact arrangement and local curve fitting remain unresolved; not reference-matched. |
 | Uroko / `Uroko.jpg` | Filled upright triangles separated by light inverted triangular spaces; staggered triangular lattice | User considers it good. Freeze baseline; review edge padding/negative space and density separately from color variation. |
 | Mameshibori / `Mameshibori.jpg` | Approximately uniform small dots on a regular rectangular grid | Baseline introduces periodic larger dots and accent-color hierarchy absent from the dominant reference structure. Add a uniform-dot reference preset; retain hierarchy only as an explicit variation. |
 
 ## Priorities and acceptance
 
 1. Finish review of the Yagasuri pilot against the specified geometry and chosen proportions.
-2. Correct Seigaiha and Shippo with explicit repeat/occlusion constructions and tests; each is a separate task.
-3. Specify Karakusa's larger motif graph before attempting curve tuning. It is more involved than adjusting three independent curves.
+2. Seigaiha and Shippo corrections are implemented with tests; review their proportions and external-editor compatibility.
+3. Refine Karakusa's experimental motif graph against the reference. Connectivity and periodic seams are tested, but arrangement/curl shapes still differ.
 4. Add reference palettes/presets for Ichimatsu and Mameshibori. Do not silently change the three user-favored baselines.
 
 No entry is certified historically accurate or production-compatible across SVG editors. Geometry candidates must pass repeat tests, visual reference review, and independent export checks. Cultural context and rights metadata require further research.
@@ -47,3 +47,9 @@ No entry is certified historically accurate or production-compatible across SVG 
 - Clipboard/download interactions, non-Chromium rendering, external design-tool imports, and theme/accessibility acceptance were not tested in this pilot. Shell and controls are unchanged. Browser diagnostics included background sync/device errors; those do not establish an application failure, but this is not a console-clean browser certification.
 
 Artifacts are local research/review material; do not publish reference images or screenshots containing them without establishing rights. See [Yagasuri construction](YAGASURI_CONSTRUCTION.md) for equations, parameter interpretation, limitations, and validation commands.
+
+Subsequent Seigaiha validation is recorded in [its construction specification](SEIGAIHA_CONSTRUCTION.md) and [QA](QA.md). The original audit captures and baseline records remain unchanged; current generator acceptance uses both the original baseline for untouched entries and the later pre-Seigaiha snapshot for corrected Yagasuri.
+
+Subsequent [Shippo validation](SHIPPO_CONSTRUCTION.md) adds a pre-Shippo snapshot preserving corrected Yagasuri/Seigaiha. The original audit baseline now applies to six untouched generators. All prior artifact snapshots remain unchanged.
+
+Subsequent [Karakusa work](KARAKUSA_CONSTRUCTION.md) adds a pre-change snapshot preserving all eight other generators, plus a repeat estimate and tested connected-vine candidate. Five untouched generators retain the original audit outputs. Prior snapshots remain unchanged; Karakusa visual acceptance is still open.

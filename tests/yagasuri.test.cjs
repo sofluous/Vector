@@ -104,10 +104,10 @@ test('invalid units fail explicitly', () => {
   }
 });
 
-test('other eight generators are byte-identical to the pre-change baseline', () => {
+test('five untouched generators retain their original audit baseline', () => {
   const baseline = JSON.parse(fs.readFileSync(path.join(root, '_docs/data/reference-audit-2026-10-28/baseline.json'), 'utf8'));
   assert.equal(patterns.length, 9);
-  for (const pattern of patterns.filter(pattern => pattern.id !== 'yagasuri')) {
+  for (const pattern of patterns.filter(pattern => !['yagasuri', 'seigaiha', 'shippo', 'karakusa'].includes(pattern.id))) {
     const previous = baseline[pattern.id];
     assert.equal(JSON.stringify(pattern.tile(40, previous.state)), JSON.stringify(previous.tile), pattern.id);
   }
