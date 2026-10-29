@@ -2,6 +2,8 @@
 
 Generated 2026-10-28. Local review material; source-image rights and historical provenance remain unverified. The current candidate improves topology but is not an exact reference match.
 
+This folder preserves the historical v2 prototype. It is superseded by the [v3 refinement](../karakusa-refinement-2026-10-28/README.md); its snapshots/results remain unchanged.
+
 - `baseline.json`: all nine exact tile outputs/settings immediately before Karakusa work, including corrected Yagasuri/Seigaiha/Shippo. Retain unchanged as the regression fixture.
 - [Reference measurement](reference-measurement.json): input hash, threshold/sampling method, search ranges, candidate periods, and rounded mismatch fractions.
 - `karakusa-before.svg`, `karakusa-after.svg`: standalone 480-square SVGs using the original global default colors and unit 40.

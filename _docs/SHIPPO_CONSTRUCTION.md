@@ -72,4 +72,4 @@ Final proportions await user review. Non-Chromium rendering, external-editor imp
 
 Geometry stays constant at four paths per tile, replacing fifty clipped circles plus fifty clip definitions and four guide circles. This reduces SVG structure substantially, but runtime speed has not been benchmarked; gallery-wide rerendering is unchanged.
 
-Subsequent Karakusa work now implements an experimental connected stem/curl/leaf graph with tested seam position/tangent constraints. Its reference arrangement still needs fitting. Keep user-favored baselines unchanged while refining remaining scoped patterns.
+Subsequent Karakusa work now implements a reference-fitted spline graph with tested branch positions, internal derivatives, and periodic coverage. Final local-curve and editor acceptance remains open. Keep user-favored baselines unchanged while refining remaining scoped patterns.

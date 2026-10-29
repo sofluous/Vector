@@ -1,6 +1,6 @@
 # Roadmap
 
-Plan established on 2026-10-28 from the scratchpad and source review. User authorized proceeding. The reference audit and Yagasuri/Seigaiha/Shippo candidates are implemented; Karakusa now has an experimental connected construction, with visual reference fitting still open. Workspace redesign and generator module separation remain planned.
+Plan established on 2026-10-28 from the scratchpad and source review. User authorized proceeding. Four generator candidates are implemented; Karakusa now uses a substantially closer reference-fitted spline composition. Generator separation and optional reference variants are complete. The first workspace is opt-in. Final visual/editor acceptance and workspace inspection/content features remain open.
 
 ## Progress on 2026-10-28
 - Completed the initial [nine-pattern visual audit](REFERENCE_AUDIT.md), preserving pre-change SVGs/settings and comparison captures. Provenance/rights and exact repeat specifications for other patterns remain open.
@@ -8,7 +8,16 @@ Plan established on 2026-10-28 from the scratchpad and source review. User autho
 - Implemented [Seigaiha's fan construction](SEIGAIHA_CONSTRUCTION.md), including fixed ring count, row stagger, background occlusion, bounded stroke, updated formula notes, and repeat tests. The combined suite has twelve passing tests. Edge checks cover live controls, intercepted SVG download generation, and the formula panel under three theme selections.
 - Implemented [Shippo's direct-lens construction](SHIPPO_CONSTRUCTION.md), removing rotated repeat geometry, clip IDs, and guide outlines. The combined suite has 19 passing tests; Edge checks cover controls, intercepted copy/download content, and the formula panel under three theme selections.
 - Implemented [Karakusa's experimental connected graph](KARAKUSA_CONSTRUCTION.md), including periodic cubic stems, tangent-attached spiral branches, filled leaves, hull-pruned neighboring paths, stroke bounds, and a formula tab. The combined suite has 27 passing tests; Edge checks cover interactions and repeated-field raster coverage under three themes.
-- Next priority: refine Karakusa's arrangement and curl/branch shapes against the reference before marking it reference-matched. Then separate generator/validation/serialization modules and add reference palettes/presets for Ichimatsu and Mameshibori. Preserve user-favored baselines. These candidates do not complete Stage 2 acceptance.
+- Refined Karakusa to sixteen fitted spline paths and eight leaves; replaced crossing-prone artificial spine/spiral connectors. Measured reference foreground F1 improves from 0.440 to 0.760 (two-pixel tolerance). Its fit data/renderer are isolated in `patterns/karakusa.js`; the combined suite has 28 passing tests and the retained browser runner passes 55 checks per theme.
+- Separated catalog/generators, validation, and SVG serialization into dependency-free modules; added optional Ichimatsu and Mameshibori reference variants while preserving defaults. See [contracts](GENERATOR_CONTRACTS.md).
+- Prepared the [selected-pattern workspace plan](WORKSPACE_PLAN.md) and [consolidated acceptance review](data/workspace-review-2026-10-28/review.html). Visual/editor acceptance remains open; these candidates do not complete Stage 2 acceptance.
+- Implemented [workspace slice 1](WORKSPACE_SESSION.md): immutable independent per-pattern state and capability metadata; 40 tests pass. Geometry and page layout remain unchanged.
+- Implemented [opt-in workspace slice 2](WORKSPACE_UI.md): gallery, selected field preview, contextual inspector, draft validation and selected export. The current lab remains the default.
+- User endorsed the workspace direction and retired legacy galleries from the target scope. Implemented grouped/searchable pattern browsing and compact paired inspector controls with revised responsive layout.
+- Implemented [density 1 and complete repeat fields](DENSITY_AND_TILING.md), preserving natural cell aspect as chosen by the user.
+- Implemented [Motif/Tile/Pattern inspection](MOTIF_TILE_PATTERN.md), view-specific exports; subsequent user clarification prioritizes native minimal repeats over square composites.
+- Implemented [compact workspace/gallery refinement](COMPACT_WORKSPACE.md): consistent visible thumbnails, toolbar, on-demand Info, aligned properties and viewport-fitted preview.
+- Implemented Construction/Context tabs and centered Fit/zoom; next is workflow acceptance and default-entry/legacy-gallery retirement.
 
 ## Stage 1: Reference and accuracy audit
 - Inventory all nine patterns against `_references/Japanese/`, recording intended variants, provenance, rights uncertainty, repeat cells, and construction rules.
@@ -28,7 +37,7 @@ Exit: corrected patterns match their chosen references, repeat cleanly, and expo
 ## Stage 3: Selected-pattern workspace
 - Review Design System shell, gallery, inspector, tab, and accessibility contracts before implementation.
 - Add gallery selection, central preview, contextual controls, and Preview/Construction/Context tabs. Move formula notes into the selected-pattern flow and label unverified material.
-- Add reset, preview zoom, tile/repeated-field views, and selected-pattern export. Preserve legacy gallery access.
+- Add reset, preview zoom, tile/repeated-field views, and selected-pattern export. Retire legacy galleries once the updated pattern/construction workflow is covered; no static/logo gallery port is planned.
 - Make navigation and inspectors usable on narrow screens; use semantic UI tokens and accessible focus behavior.
 
 Exit: users can select, edit, inspect, reset, and export with keyboard or pointer. Validate wide/narrow layouts and light, dark, and a high-style theme.
@@ -58,4 +67,12 @@ Exit: new collections fit existing contracts without special-case UI branches; a
 | Shareable parameter recipes | Reproduces variants without storing SVG blobs | After preset versioning |
 
 ## Recommended next task and review decisions
-Review/refine the experimental Karakusa composition next; its connected topology is tested but its visual arrangement still differs from the reference. Follow with generator module separation and reference preset work. Preserve legacy galleries and defer saved presets under the recommended defaults until workspace requirements are reviewed. Keep UI rebuilding behind geometry contracts and acceptance gates.
+[Workspace slice 3](WORKSPACE_INSPECTION.md) is implemented: Construction/Context content and centered Fit/zoom. Motif/Tile/Pattern views and view-specific exports are implemented. Continue visual/editor review using the consolidated review page. The workspace direction is user-endorsed. Construction content is transferred and inspection/export checks pass. Review the workflow and editor imports, then make it the primary entry before retiring the old galleries. Keep the product centered on grouped patterns and efficient contextual editing.
+
+Geometry priority: preserve ideal motifs AND authentic tessellation spacing/connections. Native repeat exports and Shift X/Y are implemented. Exact square export remains unresolved for incompatible lattices.
+
+Restored [native tessellations and phase controls](TESSELLATION.md) after rejecting square motif packing. Construction/Context content and centered Fit/zoom are implemented; next review the workflow before entry migration.
+
+## Inspection slice implemented - 2026-10-28
+
+Construction/Context tabs and centered Fit/zoom are implemented; see [inspection behavior](WORKSPACE_INSPECTION.md). Next: review the selected-pattern workflow and external-editor imports, then make the workspace the primary entry and retire the old galleries. Panning, lattice guides and new derivations remain proposals. Native tessellations and unresolved square-export constraints are unchanged.

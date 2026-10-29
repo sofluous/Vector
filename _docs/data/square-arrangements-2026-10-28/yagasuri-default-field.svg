@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480"><defs><pattern id="square_yagasuri_1" patternUnits="userSpaceOnUse" x="0" y="0" width="40" height="40" viewBox="0 0 40 40"><defs><pattern id="native_yagasuri_1" patternUnits="userSpaceOnUse" width="20" height="40" viewBox="0 0 100 200"><g fill="#2a5db1" stroke="none"><polygon points="2,-100 23,-75 23,19 2,-6"/>
+                <polygon points="27,-75 48,-100 48,-6 27,19"/><polygon points="52,-175 73,-200 73,-106 52,-81"/>
+                <polygon points="77,-200 98,-175 98,-81 77,-106"/><polygon points="2,100 23,125 23,219 2,194"/>
+                <polygon points="27,125 48,100 48,194 27,219"/><polygon points="52,25 73,0 73,94 52,119"/>
+                <polygon points="77,0 98,25 98,119 77,94"/></g></pattern></defs><rect width="40" height="40" fill="url(#native_yagasuri_1)"/></pattern></defs><rect width="480" height="480" fill="#ffffff"/><rect width="480" height="480" fill="url(#square_yagasuri_1)"/></svg>

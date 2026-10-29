@@ -55,4 +55,74 @@
 - Added a Karakusa formula tab with the generated schematic and reproducible curve equations, plus construction documentation, a pre-change baseline, measurement record, before/after SVGs, and comparison captures.
 - Added eight tests (27 combined) covering geometry/attachment/derivative/approximation/periodic coverage invariants and preservation of the other eight generators. Edge checks pass 54 assertions per theme, including export content and foreground raster coverage within a one-pixel antialias tolerance; strict raw color equality was not achieved and is recorded.
 - Measured synchronous gallery rebuild timings and reduced the default tile from 162 potential neighbor paths to 25 emitted paths. Updated roadmap/QA with remaining Karakusa fitting and compatibility work; no shell redesign, new runtime dependency, commit, or push was performed.
+- Refined Karakusa's composition against an enlarged reference cell. Replaced the crossing-prone artificial backbone/polar-spiral fit with sixteen reference-positioned spline paths and eight fitted leaves, preserving periodic branch positions and other generator outputs. Kept the v2 snapshot and comparison evidence.
+- Isolated immutable fit data and the pure renderer in `patterns/karakusa.js`, usable by classic browser scripts and Node without a bundler. Updated formula notes and tests to explain fitted knots, cubic conversion, internal C1 continuity, and C0 branching rather than forcing parent tangent agreement.
+- Added a retained app-specific Edge runner with origin-clean reference comparison and test-artifact bounds. All 28 Node tests and 55 checks per theme pass. Reference foreground F1 improves 0.440 to 0.760 at two-pixel tolerance (raw IoU 0.113 to 0.249); exact agreement/authenticity is not claimed.
+- Added normalized before/after figures, standalone SVGs, a gridded reference cell, browser/geometry reports, and updated docs. Recorded remaining curve/editor acceptance and performance limits. No external runtime dependencies, remote changes, commits, or pushes were introduced.
 
+
+## 2026-10-28 ? Generator contracts and optional reference variants
+- Extracted remaining generators/catalog, strict export validation, and SVG serialization; retained direct-file loading and unchanged default tile output.
+- Added scoped Ichimatsu primary/background and Mameshibori uniform-dot reference variants, preserving originals and keyboard focus.
+- Migrated regression tests to direct module imports and added contract/variant tests.
+
+## 2026-10-28 - Workspace specification and acceptance review
+- Documented gallery/preview/inspector behavior, independent per-pattern state, contextual capabilities, validation, reset, preview/export separation, responsive accessibility, and four implementation slices.
+- Generated eleven current standalone SVG snapshots and a consolidated nine-reference review page. Visual approval and external-editor acceptance remain pending.
+- Updated roadmap to the next concrete implementation: session model and capability metadata, preserving geometry and the existing lab.
+
+## 2026-10-28 - Workspace session model and capabilities
+- Added pure immutable session operations for selection, per-pattern edits, scoped reset, and view settings, with strict atomic validation and frozen state.
+- Added explicit supported-control/variant metadata and effective stroke-cap descriptions; reference variants retain inactive secondary values.
+- Added eight tests, bringing the suite to 40 passing tests, including eleven frozen export comparisons and browser-global module execution. Documented APIs, errors, limitations, and next UI slice. Existing page and geometry are unchanged.
+
+## 2026-10-28 - Opt-in selected-pattern workspace
+- Added workspace.html, workspace.js and token-based workspace CSS with a nine-pattern gallery, selected field preview, contextual inspector and selected SVG export. Added an opt-in link to the existing lab.
+- Connected immutable per-pattern state and capabilities. Invalid drafts retain the last valid preview, show associated errors and block export; edits/drafts survive pattern switching. Reset is scoped to the selected pattern. The lab/legacy link opens a separate tab to retain the workspace document.
+- Added retained Edge acceptance checks with exact viewport emulation and native keyboard events. Forty Node tests pass; workspace checks pass across three themes and three widths. Tabs, zoom and tile/repeat modes remain the next slice.
+
+## 2026-10-28 - Grouped library and efficient inspector
+- Added independent Japanese construction-group metadata, collapsible compact thumbnail groups, search, counts and empty-result recovery. Filtering retains selection and edits.
+- Grouped properties into Variation, Layout, Palette and Linework. Added paired density/stroke sliders and exact values, hex/picker color pairs, invalid-hex recovery and scoped slider contrast tokens.
+- Revised desktop/tablet/mobile panel layout and library height. Removed the workspace's legacy-gallery link following user direction; old files remain only for transition/construction transfer.
+- Added library tests and extended browser assertions, preserving generator and default export snapshots. Updated product scope, workspace documentation and roadmap.
+
+## 2026-10-28 - Density one and whole-cell tiling
+- Lowered validated workspace density to 1; N now means N-by-N repeat cells. User selected natural aspect ratio, so output width is selected and height is derived without stretching.
+- Added repeat-period metadata and repeatLayout/serializeField APIs with output-unit stroke compensation; retained original generator markup and legacy square serializer. Reduced duplicate drawing periods, including a single-dot uniform reference cell.
+- Added layout/validation/proportion tests and browser single-cell, export seam and reduced-period checks; recorded density 1/3/12 SVGs and compatibility notes.
+
+## 2026-10-28 - Separate complete motifs and repeat tiles
+- Added explicit complete-shape definitions for all nine patterns, including a full six-sector Asanoha rosette, isolated fan/feather/hexagon/scale/dot and one unwrapped finite vine branch. Motif exports have breathing room and no repeat clipping.
+- Added native Motif/Tile/Pattern view controls; preview, copy and download follow the view, preserve session artwork/drafts and use mode-specific filenames.
+- Square repeat composites combine native Yagasuri/Seigaiha cells. True rectangular periods remain for triangular/hexagonal lattices and the compact vine, with explicit explanations; no distortion or false square-crop repeat claim.
+- Extended geometry, state/export and browser tests and recorded three-view snapshots; retained prior drawing baselines and compatibility serializers.
+
+## 2026-10-28 - Compact workspace and visible gallery density
+- Standardized library thumbnails to a fixed two-tile browse crop with readable source strokes, independently of editor state/export geometry.
+- Replaced stacked header/description/export regions with a compact title/theme bar, combined canvas toolbar, Info disclosure and status bar. Retained full accessible action names behind short visible Copy/Export labels.
+- Aligned compact property rows and fitted preview to the remaining viewport. Narrow side panels start collapsed and expanded content stays bounded; normal page/preview scrolling is eliminated.
+- Added Info close/position handling and browser checks for viewport bounds, panel expansion and thumbnail density; retained prior state/export/seam coverage. Updated UI/architecture and roadmap documentation.
+
+## 2026-10-28 - Prioritize motif proportions and minimal native repeats
+- Recorded the governing rule: preserve mathematically defined motifs; use only required repetitions/crops for the smallest validated rectangular repeat. No distortion, rearrangement or redundant square-only supercell.
+- Removed Yagasuri/Seigaiha square composites and restored their smaller native rectangular repeat dimensions. Updated Info terminology without adding layout clutter. Square gallery windows remain browse-only.
+- Added equal-side/radius and uniform-axis-scale assertions, retained motif snapshots byte-for-byte, and reran tile/field seam checks with current native-period exports.
+
+## 2026-10-28 - Square arrangements with wrapped phase controls
+- Implemented user-authorized placement/spacing changes to make every Tile/Pattern export square while preserving complete motif geometry and uniform scale. Native square-compatible constructions reuse original repeats; other layouts place complete motifs on square periods.
+- Added per-pattern Shift X/Y percentage controls, whole-period wrap, independent state, Center recovery and scoped reset. Motif and browse defaults remain shift-independent.
+- Added square-layout tests and browser checks for all-square dimensions, independent shifts, invalid input/recovery, full-period equivalence and default/shifted export seams. Preserved native generator and motif snapshots.
+
+## 2026-10-28 ? Restore continuous tessellations
+
+- Removed square motif packing; restored original lattice generators and smallest validated rectangular periods for Tile/Pattern and genuine field crops in gallery previews. Preserved Motif view and phase controls.
+- Shift X/Y now translate native pattern origins without changing spacing or branch connectivity. Zero-phase exports match all eleven earlier minimal-repeat field fixtures exactly.
+- Replaced all-square assertions with native-aspect and frozen-tessellation checks. Historical square artifacts are marked rejected; square export for incompatible lattices remains unresolved.
+
+## 2026-10-28 - Add selected-pattern inspection and Fit/zoom
+
+- Added accessible Preview/Construction/Context tabs with arrow/Home/End navigation, retained selection/view/draft state and compact Design System styling.
+- Transferred four formula explanations into an independent immutable content module; added live native-generator diagrams, explicit pending derivations and selected reference/review context for all nine patterns. Diagram SVG IDs are independent of the hidden preview.
+- Added centered 25%-400% preview zoom and Fit; SVG export bytes, native tessellations and output dimensions remain unchanged. Export/view controls stay in Preview.
+- Validation: 61 Node tests and 193 Edge checks per nine theme/viewport combinations; syntax and whitespace checks pass. Updated roadmap: workflow/editor review and primary-entry retirement are next.

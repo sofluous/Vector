@@ -2,14 +2,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-// Test the shipped inline definitions until the planned module extraction.
-const helpers = source.slice(source.indexOf('    const SQRT3'), source.indexOf('    const ui ='));
-const definitions = source.slice(source.indexOf('    const patternDefs ='), source.indexOf('    const codeProjects ='));
-const patterns = vm.runInNewContext(`${helpers}${definitions};patternDefs`);
+const patterns = require('../patterns/catalog.js').patterns;
 const yagasuri = patterns.find(pattern => pattern.id === 'yagasuri');
 const state = { line: '#2a5db1', accent: '#6f8dcb', bg: '#ffffff', stroke: 1.6, reps: 12, frame: 480 };
 

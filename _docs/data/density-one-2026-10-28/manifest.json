@@ -1,0 +1,277 @@
+{
+  "state": {
+    "frame": 480,
+    "reps": 12,
+    "stroke": 1.6,
+    "line": "#2a5db1",
+    "accent": "#6f8dcb",
+    "bg": "#ffffff",
+    "variant": "default"
+  },
+  "records": [
+    {
+      "id": "asanoha",
+      "variant": "default",
+      "reps": 1,
+      "filename": "asanoha-default-1.svg",
+      "width": 480,
+      "height": 831.3843614730196
+    },
+    {
+      "id": "asanoha",
+      "variant": "default",
+      "reps": 3,
+      "filename": "asanoha-default-3.svg",
+      "width": 480,
+      "height": 831.3843614730197
+    },
+    {
+      "id": "asanoha",
+      "variant": "default",
+      "reps": 12,
+      "filename": "asanoha-default-12.svg",
+      "width": 480,
+      "height": 831.3843614730197
+    },
+    {
+      "id": "yagasuri",
+      "variant": "default",
+      "reps": 1,
+      "filename": "yagasuri-default-1.svg",
+      "width": 480,
+      "height": 960
+    },
+    {
+      "id": "yagasuri",
+      "variant": "default",
+      "reps": 3,
+      "filename": "yagasuri-default-3.svg",
+      "width": 480,
+      "height": 960
+    },
+    {
+      "id": "yagasuri",
+      "variant": "default",
+      "reps": 12,
+      "filename": "yagasuri-default-12.svg",
+      "width": 480,
+      "height": 960
+    },
+    {
+      "id": "seigaiha",
+      "variant": "default",
+      "reps": 1,
+      "filename": "seigaiha-default-1.svg",
+      "width": 480,
+      "height": 240
+    },
+    {
+      "id": "seigaiha",
+      "variant": "default",
+      "reps": 3,
+      "filename": "seigaiha-default-3.svg",
+      "width": 480,
+      "height": 240
+    },
+    {
+      "id": "seigaiha",
+      "variant": "default",
+      "reps": 12,
+      "filename": "seigaiha-default-12.svg",
+      "width": 480,
+      "height": 240
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "default",
+      "reps": 1,
+      "filename": "ichimatsu-default-1.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "default",
+      "reps": 3,
+      "filename": "ichimatsu-default-3.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "default",
+      "reps": 12,
+      "filename": "ichimatsu-default-12.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "reference",
+      "reps": 1,
+      "filename": "ichimatsu-reference-1.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "reference",
+      "reps": 3,
+      "filename": "ichimatsu-reference-3.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "reference",
+      "reps": 12,
+      "filename": "ichimatsu-reference-12.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "shippo",
+      "variant": "default",
+      "reps": 1,
+      "filename": "shippo-default-1.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "shippo",
+      "variant": "default",
+      "reps": 3,
+      "filename": "shippo-default-3.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "shippo",
+      "variant": "default",
+      "reps": 12,
+      "filename": "shippo-default-12.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "kikko",
+      "variant": "default",
+      "reps": 1,
+      "filename": "kikko-default-1.svg",
+      "width": 480,
+      "height": 831.3842038375914
+    },
+    {
+      "id": "kikko",
+      "variant": "default",
+      "reps": 3,
+      "filename": "kikko-default-3.svg",
+      "width": 480,
+      "height": 831.3842038375914
+    },
+    {
+      "id": "kikko",
+      "variant": "default",
+      "reps": 12,
+      "filename": "kikko-default-12.svg",
+      "width": 480,
+      "height": 831.3842038375914
+    },
+    {
+      "id": "karakusa",
+      "variant": "default",
+      "reps": 1,
+      "filename": "karakusa-default-1.svg",
+      "width": 480,
+      "height": 309.06479999999993
+    },
+    {
+      "id": "karakusa",
+      "variant": "default",
+      "reps": 3,
+      "filename": "karakusa-default-3.svg",
+      "width": 480,
+      "height": 309.0648
+    },
+    {
+      "id": "karakusa",
+      "variant": "default",
+      "reps": 12,
+      "filename": "karakusa-default-12.svg",
+      "width": 480,
+      "height": 309.0648
+    },
+    {
+      "id": "uroko",
+      "variant": "default",
+      "reps": 1,
+      "filename": "uroko-default-1.svg",
+      "width": 480,
+      "height": 415.69223999999997
+    },
+    {
+      "id": "uroko",
+      "variant": "default",
+      "reps": 3,
+      "filename": "uroko-default-3.svg",
+      "width": 480,
+      "height": 415.69223999999997
+    },
+    {
+      "id": "uroko",
+      "variant": "default",
+      "reps": 12,
+      "filename": "uroko-default-12.svg",
+      "width": 480,
+      "height": 415.69223999999997
+    },
+    {
+      "id": "mameshibori",
+      "variant": "default",
+      "reps": 1,
+      "filename": "mameshibori-default-1.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "mameshibori",
+      "variant": "default",
+      "reps": 3,
+      "filename": "mameshibori-default-3.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "mameshibori",
+      "variant": "default",
+      "reps": 12,
+      "filename": "mameshibori-default-12.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "mameshibori",
+      "variant": "reference",
+      "reps": 1,
+      "filename": "mameshibori-reference-1.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "mameshibori",
+      "variant": "reference",
+      "reps": 3,
+      "filename": "mameshibori-reference-3.svg",
+      "width": 480,
+      "height": 480
+    },
+    {
+      "id": "mameshibori",
+      "variant": "reference",
+      "reps": 12,
+      "filename": "mameshibori-reference-12.svg",
+      "width": 480,
+      "height": 480
+    }
+  ]
+}

@@ -22,4 +22,25 @@ Tracks product direction, current implementation, proposed development, validati
 - [Yagasuri construction](YAGASURI_CONSTRUCTION.md): implemented pilot equations, repeat rules, tests, and limitations.
 - [Seigaiha construction](SEIGAIHA_CONSTRUCTION.md): layered wave fans, repeat/occlusion rules, stroke limits, and validation.
 - [Shippo construction](SHIPPO_CONSTRUCTION.md): direct equal-circle lens petals, tip gaps, square repeat, and validation.
-- [Karakusa construction](KARAKUSA_CONSTRUCTION.md): experimental connected-vine graph, spiral/leaf equations, seam tests, and remaining reference-fitting work.
+- [Karakusa construction](KARAKUSA_CONSTRUCTION.md): reference-fitted spline graph, branch/leaf equations, measured fit improvement, seam tests, and browser-runner usage.
+
+- [Generator contracts](GENERATOR_CONTRACTS.md): runtime modules, validation, reference variants, and checks.
+
+- [Selected-pattern workspace plan](WORKSPACE_PLAN.md): acceptance gates, proposed interactions/state, control capabilities, and implementation slices.
+- [Current pattern review](data/workspace-review-2026-10-28/review.html): nine local references and eleven standalone candidate/default SVGs.
+
+- [Workspace session model](WORKSPACE_SESSION.md): implemented state/capability APIs, examples, validation and UI integration responsibilities.
+
+- [Opt-in workspace](WORKSPACE_UI.md): grouped browsing, paired inspector controls, responsive behavior, browser checks and legacy retirement direction.
+
+- [Density and seamless output](DENSITY_AND_TILING.md): density 1, natural cell aspect, whole-field repetition, APIs and compatibility.
+
+- [Motif, tile and pattern](MOTIF_TILE_PATTERN.md): complete shapes, repeat construction, square-tile exceptions and view-specific exports.
+
+- [Compact workspace](COMPACT_WORKSPACE.md): readable gallery previews, toolbar/Info layout, fitted preview, responsive panels and validation.
+
+- [Square arrangements](SQUARE_ARRANGEMENTS.md): authorized all-square layouts, unchanged motif geometry, Shift X/Y, Center, tests and compatibility.
+
+- [Current tessellation contract](TESSELLATION.md): native lattice spacing/connections, phase controls, and unresolved square-export constraints. Supersedes the rejected square-packing experiment.
+
+- [Workspace inspection](WORKSPACE_INSPECTION.md): Construction/Context tabs, selected reference/review content and preview-only Fit/zoom.

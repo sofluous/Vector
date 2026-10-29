@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="./design-system/theme.css">
   <script src="./design-system/js/theme-registry.js"></script>
   <script src="./design-system/js/theme-selector.js"></script>
+  <script src="./patterns/karakusa.js"></script>
+  <script src="./patterns/catalog.js"></script>
+  <script src="./patterns/validation.js"></script>
+  <script src="./patterns/svg.js"></script>
   <style>
     :root {
       --bg: #0b1015;
@@ -300,6 +304,7 @@
 </head>
 <body>
   <main class="wrap">
+    <p><a href="./workspace.html" style="color: var(--ds-accent)">Open pattern workspace (preview)</a></p>
     <section class="page-head" aria-label="Page header">
       <div class="page-head-copy">
         <h1>Vectors: Static Concepts + Accurate Tileable Japanese Patterns</h1>
@@ -427,49 +432,24 @@ Ring count stays fixed when repetition changes.
 Ratios are estimated from the supplied reference, not historical constants.</pre>
       </section>
       <section class="formula-body" data-formula-body="karakusa">
-        <svg id="karakusaDiagram" class="mini-diagram" viewBox="0 0 278 179" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Idealized connected vine repeat with attached inward curls and pointed leaves"></svg>
-        <pre>Idealized connected-vine reconstruction; not an exact tracing.
+        <svg id="karakusaDiagram" class="mini-diagram" viewBox="0 0 278 179" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Reference-fitted branching curl repeat with pointed leaves"></svg>
+        <pre>Reference-fitted spline reconstruction; not an exact tracing.
 W = 4u; H = W * 179/278 (estimated reference proportions).
-Two periodic cubic stems form the connected backbone.
-Eight curls attach at evaluated stem points with matching tangent directions.
-Spiral radius rho(t) = R * (1 - 0.92t*t).
-Angle theta(t) = theta0 + winding * 2*pi*turns*t.
-Convert short spiral intervals to cubic Hermite segments.
-Pointed leaves share their base points with the stems.
-Match stem positions and derivatives across each repeated boundary.
+Sixteen branching curl paths follow measured composition landmarks.
+For neighboring knots P[i-1], P[i], P[i+1], P[i+2]:
+C1 = P[i] + (P[i+1] - P[i-1])/6
+C2 = P[i+1] - (P[i+2] - P[i])/6
+Draw cubic Bezier P[i], C1, C2, P[i+1].
+Internal joins are C1 continuous. Branches share positions, not tangents.
+Three branch joins connect translated copies across the vertical period.
+Eight pointed leaves share their base points with the fitted paths.
 Effective stroke = min(requested stroke, 0.018W); accent is unused.
-Arrangement and proportions remain approximate; historical context is unverified.</pre>
+Local curves remain estimates; texture and historical context are unverified.</pre>
       </section>
     </div>
   </div>
 
   <script>
-    const SQRT3 = Math.sqrt(3);
-
-    function n(v) {
-      return Number(v.toFixed(4));
-    }
-
-    function arcPath(cx, cy, r, up) {
-      const x0 = n(cx - r);
-      const x1 = n(cx + r);
-      const sweep = up ? 1 : 0;
-      return `M ${x0} ${n(cy)} A ${n(r)} ${n(r)} 0 0 ${sweep} ${x1} ${n(cy)}`;
-    }
-
-    function polygonPoints(cx, cy, r, sides, rotation) {
-      const pts = [];
-      for (let i = 0; i < sides; i += 1) {
-        const a = rotation + (Math.PI * 2 * i / sides);
-        pts.push(`${n(cx + r * Math.cos(a))},${n(cy + r * Math.sin(a))}`);
-      }
-      return pts.join(" ");
-    }
-
-    function hex(cx, cy, r) {
-      return `<polygon points="${polygonPoints(cx, cy, r, 6, Math.PI / 6)}"/>`;
-    }
-
     const ui = {
       reps: document.getElementById("reps"),
       repsVal: document.getElementById("repsVal"),
@@ -499,355 +479,8 @@ Arrangement and proportions remain approximate; historical context is unverified
       frame: 480
     };
 
-    const patternDefs = [
-      {
-        id: "asanoha",
-        name: "Asanoha",
-        desc: "Hemp-leaf star lattice on an exact 60-degree triangular grid.",
-        tile(unit, s) {
-          const r = unit * 0.58;
-          const dx = SQRT3 * r;
-          const dy = 1.5 * r;
-          const w = 2 * dx;
-          const h = 2 * dy;
-          let geom = "";
-
-          function oneHex(cx, cy, rr) {
-            const t = [cx, cy - rr];
-            const ur = [cx + (SQRT3 / 2) * rr, cy - rr / 2];
-            const lr = [cx + (SQRT3 / 2) * rr, cy + rr / 2];
-            const b = [cx, cy + rr];
-            const ll = [cx - (SQRT3 / 2) * rr, cy + rr / 2];
-            const ul = [cx - (SQRT3 / 2) * rr, cy - rr / 2];
-            return `
-              <path d="M ${n(t[0])} ${n(t[1])} L ${n(ur[0])} ${n(ur[1])} L ${n(lr[0])} ${n(lr[1])}
-                       M ${n(t[0])} ${n(t[1])} L ${n(ul[0])} ${n(ul[1])} L ${n(ll[0])} ${n(ll[1])}
-                       M ${n(t[0])} ${n(t[1])} L ${n(ll[0])} ${n(ll[1])}
-                       M ${n(t[0])} ${n(t[1])} L ${n(lr[0])} ${n(lr[1])}
-                       M ${n(t[0])} ${n(t[1])} L ${n(cx)} ${n(cy)}
-                       M ${n(lr[0])} ${n(lr[1])} L ${n(b[0])} ${n(b[1])} L ${n(ll[0])} ${n(ll[1])}
-                       M ${n(lr[0])} ${n(lr[1])} L ${n(ll[0])} ${n(ll[1])}
-                       M ${n(lr[0])} ${n(lr[1])} L ${n(cx)} ${n(cy)}
-                       M ${n(ll[0])} ${n(ll[1])} L ${n(cx)} ${n(cy)}"/>
-            `;
-          }
-
-          for (let row = -1; row <= 4; row += 1) {
-            const y = row * dy;
-            const off = (row % 2 === 0) ? 0 : dx / 2;
-            for (let col = -1; col <= 4; col += 1) {
-              const x = col * dx + off;
-              geom += oneHex(x, y, r);
-            }
-          }
-
-          return {
-            w: n(w),
-            h: n(h),
-            markup: `<g stroke="${s.line}" stroke-width="${s.stroke}" fill="none">${geom}</g>`
-          };
-        }
-      },
-      {
-        id: "yagasuri",
-        name: "Yagasuri",
-        desc: "Paired feather vanes with opposing columns staggered by half a repeat.",
-        tile(unit, s) {
-          if (!Number.isFinite(unit) || unit <= 0) {
-            throw new RangeError("Yagasuri unit must be a positive finite number.");
-          }
-          const pitch = unit / 2;
-          const inset = unit * 0.02;
-          const shaftGap = unit * 0.04;
-          const slope = unit * 0.25;
-          const body = unit * 0.94;
-          let motifs = "";
-
-          // Adjacent columns reverse direction and shift by half the vertical period.
-          for (let row = -1; row <= 0; row += 1) {
-            for (let col = 0; col < 2; col += 1) {
-              const y = row * 2 * unit + (col === 0 ? unit : 0);
-              const center = (col + 0.5) * pitch;
-              const outerLeft = col * pitch + inset;
-              const innerLeft = center - shaftGap / 2;
-              const innerRight = center + shaftGap / 2;
-              const outerRight = (col + 1) * pitch - inset;
-              const outerY = y + (col === 0 ? 0 : slope);
-              const innerY = y + (col === 0 ? slope : 0);
-              motifs += `<polygon points="${n(outerLeft)},${n(outerY)} ${n(innerLeft)},${n(innerY)} ${n(innerLeft)},${n(innerY + body)} ${n(outerLeft)},${n(outerY + body)}"/>
-                <polygon points="${n(innerRight)},${n(innerY)} ${n(outerRight)},${n(outerY)} ${n(outerRight)},${n(outerY + body)} ${n(innerRight)},${n(innerY + body)}"/>`;
-            }
-          }
-          return {
-            w: n(unit),
-            h: n(2 * unit),
-            markup: `<g fill="${s.line}" stroke="none">${motifs}</g>`
-          };
-        }
-      },
-      {
-        id: "seigaiha",
-        name: "Seigaiha",
-        desc: "Four-ring wave fans with staggered, overlapping rows. Stroke is capped at 45% of ring spacing.",
-        tile(unit, s) {
-          if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(s.stroke) || s.stroke <= 0) {
-            throw new RangeError("Seigaiha unit and stroke must be positive finite numbers.");
-          }
-          const radius = unit / 2;
-          const ringStep = radius * 0.24;
-          const stroke = Math.min(s.stroke, ringStep * 0.45);
-          let fans = "";
-
-          // Paint back to front: each filled fan hides the lower arcs behind it.
-          // The last row starts below the tile but its stroke reaches the bottom edge.
-          for (let row = 0; row <= 4; row += 1) {
-            const cy = row * radius / 2;
-            const offset = row % 2 ? radius : 0;
-            for (let col = -1; col <= 1; col += 1) {
-              const cx = col * unit + offset;
-              const silhouette = `${arcPath(cx, cy, radius, true)} Z`;
-              let arcs = "";
-              for (let ring = 0; ring < 4; ring += 1) {
-                arcs += `${arcPath(cx, cy, radius - ring * ringStep, true)} `;
-              }
-              fans += `<path d="${silhouette}" fill="${s.bg}" stroke="none"/>
-                <path d="${arcs.trim()}" fill="none" stroke="${s.line}" stroke-width="${n(stroke)}"/>`;
-            }
-          }
-          return {
-            w: n(unit),
-            h: n(radius),
-            markup: fans
-          };
-        }
-      },
-      {
-        id: "ichimatsu",
-        name: "Ichimatsu",
-        desc: "Classic checkerboard from a two-cell parity unit.",
-        tile(unit, s) {
-          const u = unit;
-          return {
-            w: n(2 * u),
-            h: n(2 * u),
-            markup: `
-              <rect x="0" y="0" width="${n(u)}" height="${n(u)}" fill="${s.line}"/>
-              <rect x="${n(u)}" y="${n(u)}" width="${n(u)}" height="${n(u)}" fill="${s.line}"/>
-              <rect x="${n(u)}" y="0" width="${n(u)}" height="${n(u)}" fill="${s.accent}"/>
-              <rect x="0" y="${n(u)}" width="${n(u)}" height="${n(u)}" fill="${s.accent}"/>
-            `
-          };
-        }
-      },
-      {
-        id: "shippo",
-        name: "Shippo",
-        desc: "Four diagonal equal-circle lens petals with open tip gaps. Filled motif; stroke and accent are unused.",
-        tile(unit, s) {
-          if (!Number.isFinite(unit) || unit <= 0) {
-            throw new RangeError("Shippo unit must be a positive finite number.");
-          }
-          const radius = unit * 0.48;
-          const center = unit / 2;
-          // Intersections of circles centered on adjacent edge midpoints.
-          // Work in unit ratios to avoid squaring large coordinates.
-          const inset = unit * (0.25 - Math.sqrt(0.48 ** 2 - 0.125) / Math.SQRT2);
-          let petals = "";
-
-          for (const [cornerX, cornerY] of [[0, 0], [unit, 0], [unit, unit], [0, unit]]) {
-            const sx = cornerX === 0 ? 1 : -1;
-            const sy = cornerY === 0 ? 1 : -1;
-            const x1 = n(cornerX + sx * inset);
-            const y1 = n(cornerY + sy * inset);
-            const x2 = n(center - sx * inset);
-            const y2 = n(center - sy * inset);
-            petals += `<path d="M ${x1} ${y1} A ${n(radius)} ${n(radius)} 0 0 1 ${x2} ${y2} A ${n(radius)} ${n(radius)} 0 0 1 ${x1} ${y1} Z"/>`;
-          }
-          return {
-            w: n(unit),
-            h: n(unit),
-            markup: `<g fill="${s.line}" stroke="none">${petals}</g>`
-          };
-        }
-      },
-      {
-        id: "kikko",
-        name: "Kikko",
-        desc: "Regular hexagon tortoiseshell with concentric inner hex lines.",
-        tile(unit, s) {
-          const r = unit * 0.42;
-          const dx = SQRT3 * r;
-          const dy = 1.5 * r;
-          const w = 2 * dx;
-          const h = 2 * dy;
-          let out = "";
-          let inner = "";
-          for (let row = -1; row <= 2; row += 1) {
-            const y = row * dy;
-            const off = (row % 2 ? dx / 2 : 0);
-            for (let col = -1; col <= 3; col += 1) {
-              const x = col * dx + off;
-              out += hex(x, y, r);
-              inner += hex(x, y, r * 0.56);
-            }
-          }
-          return {
-            w: n(w),
-            h: n(h),
-            markup: `<g stroke="${s.line}" stroke-width="${s.stroke}" fill="none">${out}</g><g stroke="${s.accent}" stroke-width="${n(s.stroke * 0.8)}" fill="none">${inner}</g>`
-          };
-        }
-      },
-      {
-        id: "karakusa",
-        name: "Karakusa",
-        desc: "Idealized connected vines, inward curls, and pointed leaves. Stroke capped at 1.8% of motif width; accent unused.",
-        tile(unit, s) {
-          if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(s.stroke) || s.stroke <= 0) {
-            throw new RangeError("Karakusa unit and stroke must be positive finite numbers.");
-          }
-          const width = 4 * unit;
-          const height = 179 / 278;
-          const horizontal = [
-            [[0, 0.36], [0.10, 0.36], [0.15, 0.44], [0.30, 0.40]],
-            [[0.30, 0.40], [0.45, 0.36], [0.49, 0.24], [0.65, 0.28]],
-            [[0.65, 0.28], [0.81, 0.32], [0.90, 0.36], [1, 0.36]]
-          ];
-          const vertical = [
-            [[0.30, 0.40], [0.19, 0.46], [0.29, 0.60], [0.45, 0.60]],
-            [[0.45, 0.60], [0.61, 0.60], [0.41, 0.34 + height], [0.30, 0.40 + height]]
-          ];
-          const point = p => n(p[0] * width) + " " + n(p[1] * width);
-          const cubic = c => "C " + c.slice(1).map(point).join(" ");
-          const curvePath = curves => "M " + point(curves[0][0]) + " " + curves.map(cubic).join(" ");
-          function at(c, t) {
-            const q = 1 - t;
-            return [0, 1].map(axis => q ** 3 * c[0][axis] + 3 * q * q * t * c[1][axis] + 3 * q * t * t * c[2][axis] + t ** 3 * c[3][axis]);
-          }
-          function tangent(c, t) {
-            return [0, 1].map(axis => 3 * (1 - t) ** 2 * (c[1][axis] - c[0][axis]) + 6 * (1 - t) * t * (c[2][axis] - c[1][axis]) + 3 * t * t * (c[3][axis] - c[2][axis]));
-          }
-          function offset(p, direction, distance) {
-            const length = Math.hypot(...direction);
-            return p.map((value, axis) => value + direction[axis] * distance / length);
-          }
-          const parts = [];
-          function addPart(markup, points) {
-            parts.push({ markup, minX: Math.min(...points.map(p => p[0])), maxX: Math.max(...points.map(p => p[0])), minY: Math.min(...points.map(p => p[1])), maxY: Math.max(...points.map(p => p[1])) });
-          }
-          addPart('<path data-part="horizontal" d="' + curvePath(horizontal) + '"/>', horizontal.flat());
-          addPart('<path data-part="vertical" d="' + curvePath(vertical) + '"/>', vertical.flat());
-          // Source curve, anchor parameter, center, radius, angle, winding, turns.
-          const branches = [
-            [horizontal[0], 0.50, [0.11, 0.18], 0.145, Math.PI / 2, 1, 1.55],
-            [horizontal[1], 0.25, [0.40, 0.16], 0.145, Math.PI / 2, 1, 1.45],
-            [horizontal[2], 0.55, [0.79, 0.12], 0.160, Math.PI / 2, -1, 1.55],
-            [horizontal[0], 0.15, [0.10, 0.54], 0.110, -Math.PI / 2, 1, 1.40],
-            [horizontal[1], 0.65, [0.60, 0.48], 0.140, -Math.PI / 2, -1, 1.50],
-            [horizontal[2], 0.92, [0.88, 0.53], 0.110, -Math.PI / 2, -1, 1.40],
-            [vertical[1], 0.65, [0.59, 0.10 + height], 0.065, Math.PI / 2, 1, 1.35],
-            [vertical[1], 0.25, [0.61, 0.66], 0.055, Math.PI, 1, 1.30]
-          ];
-          branches.forEach(([source, anchorT, center, radius, angle, winding, turns], index) => {
-            const omega = winding * 2 * Math.PI * turns;
-            function spiral(t) {
-              const theta = angle + omega * t;
-              const r = radius * (1 - 0.92 * t * t);
-              const dr = -1.84 * radius * t;
-              return {
-                p: [center[0] + r * Math.cos(theta), center[1] + r * Math.sin(theta)],
-                d: [dr * Math.cos(theta) - r * omega * Math.sin(theta), dr * Math.sin(theta) + r * omega * Math.cos(theta)]
-              };
-            }
-            const anchor = at(source, anchorT);
-            const first = spiral(0);
-            const lead = Math.min(0.06, Math.hypot(first.p[0] - anchor[0], first.p[1] - anchor[1]) * 0.45);
-            const curves = [[anchor, offset(anchor, tangent(source, anchorT), lead), offset(first.p, first.d, -lead), first.p]];
-            // Cubic Hermite approximation: at most 30 degrees per interval.
-            const steps = Math.ceil(turns * 12);
-            for (let step = 0; step < steps; step += 1) {
-              const a = spiral(step / steps);
-              const b = spiral((step + 1) / steps);
-              const dt = 1 / steps;
-              curves.push([a.p, a.p.map((v, axis) => v + a.d[axis] * dt / 3), b.p.map((v, axis) => v - b.d[axis] * dt / 3), b.p]);
-            }
-            addPart('<path data-part="curl-' + index + '" d="' + curvePath(curves) + '"/>', curves.flat());
-          });
-          const leaves = [[horizontal[0], 0.74, -1], [horizontal[1], 0.13, -1], [horizontal[1], 0.80, 1], [horizontal[2], 0.30, -1], [horizontal[2], 0.75, 1], [vertical[0], 0.55, 1], [vertical[1], 0.50, -1], [vertical[1], 0.85, 1]];
-          leaves.forEach(([source, t, side], index) => {
-            const base = at(source, t);
-            const direction = tangent(source, t);
-            const angle = Math.atan2(direction[1], direction[0]) + side * 0.90;
-            const axis = [Math.cos(angle), Math.sin(angle)];
-            const normal = [-axis[1], axis[0]];
-            const tip = offset(base, axis, 0.060);
-            const middle = offset(base, axis, 0.030);
-            const a = offset(middle, normal, 0.018);
-            const b = offset(middle, normal, -0.018);
-            addPart('<path data-part="leaf-' + index + '" fill="' + s.line + '" stroke="none" d="M ' + point(base) + ' Q ' + point(a) + ' ' + point(tip) + ' Q ' + point(b) + ' ' + point(base) + ' Z"/>', [base, a, tip, b]);
-          });
-          let copies = "";
-          const stroke = Math.min(s.stroke, width * 0.018);
-          const margin = stroke / (2 * width);
-          // Control-point hulls conservatively exclude invisible neighboring paths.
-          // Remaining copies include the connector and curls crossing cell edges.
-          for (let row = -1; row <= 1; row += 1) {
-            for (let col = -1; col <= 1; col += 1) {
-              const visible = parts.filter(p => p.maxX + col + margin >= 0 && p.minX + col - margin <= 1 && p.maxY + row * height + margin >= 0 && p.minY + row * height - margin <= height);
-              if (visible.length) copies += '<g data-motif="' + col + ',' + row + '" transform="translate(' + n(col * width) + ' ' + n(row * height * width) + ')">' + visible.map(p => p.markup).join("") + '</g>';
-            }
-          }
-          return {
-            w: n(width),
-            h: n(height * width),
-            markup: '<g fill="none" stroke="' + s.line + '" stroke-width="' + n(stroke) + '" stroke-linecap="round" stroke-linejoin="round">' + copies + '</g>'
-          };
-        }
-      },
-      {
-        id: "uroko",
-        name: "Uroko",
-        desc: "Alternating equilateral triangle scales with row offset.",
-        tile(unit, s) {
-          const a = unit;
-          const h = a * SQRT3 / 2;
-          let tris = "";
-          for (let row = -1; row <= 2; row += 1) {
-            const y = row * h;
-            const off = (row % 2 ? a / 2 : 0);
-            for (let col = -1; col <= 3; col += 1) {
-              const x = col * a + off;
-              const p1 = `${n(x)},${n(y + h)}`;
-              const p2 = `${n(x + a / 2)},${n(y)}`;
-              const p3 = `${n(x + a)},${n(y + h)}`;
-              tris += `<polygon points="${p1} ${p2} ${p3}" fill="${(col + row) % 2 ? s.accent : s.line}"/>`;
-            }
-          }
-          return { w: n(2 * a), h: n(2 * h), markup: tris };
-        }
-      },
-      {
-        id: "mameshibori",
-        name: "Mameshibori",
-        desc: "Small-dot shibori grid with regular spacing and dot hierarchy.",
-        tile(unit, s) {
-          const u = unit;
-          const w = 2 * u;
-          const h = 2 * u;
-          const step = u / 4;
-          let dots = "";
-          for (let r = 0; r <= 8; r += 1) {
-            for (let c = 0; c <= 8; c += 1) {
-              const x = c * step;
-              const y = r * step;
-              const major = (r % 4 === 0 && c % 4 === 0);
-              dots += `<circle cx="${n(x)}" cy="${n(y)}" r="${n(major ? u * 0.08 : u * 0.055)}" fill="${major ? s.line : s.accent}"/>`;
-            }
-          }
-          return { w: n(w), h: n(h), markup: dots };
-        }
-      }
-    ];
+    const patternDefs = PatternCatalog.patterns;
+    const patternPresets = Object.create(null);
 
     const codeProjects = [
       "_3Dmodels",
@@ -1143,21 +776,7 @@ Arrangement and proportions remain approximate; historical context is unverified
     }
 
     function makePatternSVG(pattern, idx) {
-      const frame = state.frame;
-      const unit = frame / state.reps;
-      const tile = pattern.tile(unit, state);
-      const pid = `p_${pattern.id}_${idx}`;
-      return `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${frame} ${frame}">
-          <defs>
-            <pattern id="${pid}" patternUnits="userSpaceOnUse" width="${tile.w}" height="${tile.h}">
-              ${tile.markup}
-            </pattern>
-          </defs>
-          <rect width="${frame}" height="${frame}" fill="${state.bg}"/>
-          <rect width="${frame}" height="${frame}" fill="url(#${pid})"/>
-        </svg>
-      `.trim();
+      return PatternSVG.serialize(pattern, idx, state, patternPresets[pattern.id] || "default");
     }
 
     function makeStaticSVG(v) {
@@ -1180,6 +799,7 @@ Arrangement and proportions remain approximate; historical context is unverified
           <div class="meta">
             <h3 class="name">${p.name}</h3>
             <p class="desc">${p.desc}</p>
+            ${["ichimatsu", "mameshibori"].includes(p.id) ? `<label>Variant <select data-preset="${p.id}" aria-label="${p.name} variant"><option value="default" ${!patternPresets[p.id] || patternPresets[p.id] === "default" ? "selected" : ""}>Original variation</option><option value="reference" ${patternPresets[p.id] === "reference" ? "selected" : ""}>Reference variant</option></select></label><p class="desc">Reference uses primary/background colors; secondary color is unused.</p>` : ""}
             <div class="actions">
               <button type="button" data-action="copy">Copy SVG</button>
               <button type="button" data-action="download">Download</button>
@@ -1244,7 +864,7 @@ Arrangement and proportions remain approximate; historical context is unverified
       state.line = ui.lineColor.value;
       state.accent = ui.accentColor.value;
       state.bg = ui.bgColor.value;
-      state.frame = Math.max(240, Number(ui.frameSize.value) || 480);
+      state.frame = Math.min(2000, Math.max(240, Number(ui.frameSize.value) || 480));
       ui.frameSize.value = String(state.frame);
       renderPatternGallery();
     }
@@ -1294,6 +914,13 @@ Arrangement and proportions remain approximate; historical context is unverified
       });
     });
 
+    ui.patternGallery.addEventListener("change", (event) => {
+      const select = event.target.closest("select[data-preset]");
+      if (!select) return;
+      patternPresets[select.dataset.preset] = select.value;
+      renderPatternGallery();
+      ui.patternGallery.querySelector(`select[data-preset="${select.dataset.preset}"]`).focus();
+    });
     wireGalleryEvents(ui.patternGallery);
     wireGalleryEvents(ui.projectLogoGallery);
     wireGalleryEvents(ui.staticGallery);

@@ -1,97 +1,95 @@
-# Karakusa construction
+# Karakusa reference-fitted construction
 
-Status: implemented experimental candidate `karakusa-2`, 2026-10-28. Version name is documentation-only. This is an idealized connected-vine reconstruction, not a tracing or an authenticated historical definition. Source: `_references/Japanese/Karakusa.jpg`; creator, provenance, and reuse rights remain unknown. The current arrangement still differs from the reference and requires further visual fitting before reference-match acceptance.
+Status: implemented candidate `karakusa-3`, reviewed 2026-10-28. This version refines the supplied `_references/Japanese/Karakusa.jpg` using measured landmarks and fitted splines. It is not an exact tracing, a universal Karakusa formula, or historical authentication. Source provenance and reuse rights remain unverified.
 
-## Reference observations
+## Result and evidence
 
-The reference combines connected sweeping stems, inward curls of different sizes, and small pointed leaves. Its supplied palette is light vines on blue ground. The existing generator instead renders sparse disconnected curve rows.
+The earlier `karakusa-2` prototype used two artificial backbone curves and eight generic polar spirals. It repeated correctly, but its rows, regular curls, and connector routes differed from the reference. Moving spiral centers alone produced crossings. The replacement uses sixteen reference-positioned branching paths and eight pointed leaves; the earlier prototype is preserved in the refinement baseline and original review artifacts.
 
-A binary light-pixel comparison of the supplied raster found candidate periods of 278 pixels horizontally and 179 pixels vertically. Classification used RGB channels greater than 180 and sampled every third pixel; the best integer shifts over ranges 150..420 and 100..280 had mismatch fractions 0.0287 and 0.0262. This estimates the composition ratio, not exact pixel periodicity or a historical module.
+The [comparison page](data/karakusa-refinement-2026-10-28/comparison.html) and [capture](data/karakusa-refinement-2026-10-28/comparison.png) show equal approximate cell spacing and stroke for the two generated panels. The [enlarged reference cell](data/karakusa-refinement-2026-10-28/reference-cell.png) records the landmarks used for fitting.
 
-## Graph and repeat
+At the original 278-by-179 cell scale, foreground F1 improves from **0.440 to 0.760** with a two-pixel square-neighborhood tolerance. Raw pixel intersection-over-union improves from 0.113 to 0.249. These are improvements over the preserved prototype, not exact image agreement. Texture, stroke irregularity, local curve estimates, and the approximate repeat period leave residual differences.
 
-Normalize horizontal width to 1 and set height `H = 179/278`. A three-segment cubic horizontal backbone crosses the left/right edges with matched endpoint and derivative. A two-segment vertical connector joins one backbone node to its vertically translated copy, also matching position and derivative. This gives a connected two-direction periodic graph.
+## Implementation and contract
 
-Eight spiral branches attach to evaluated backbone/connector points. Their connecting cubics share each source tangent direction and each spiral's initial tangent direction. Pointed two-quadratic leaves share base points with stems. Branches can extend outside the nominal cell; translated neighboring motifs supply the cropped geometry at boundaries.
+- Runtime: [patterns/karakusa.js](../patterns/karakusa.js), loaded before the inline app script. It works as a classic browser script for local-file use and as a dependency-free CommonJS module in Node.
+- Browser API: `KarakusaPattern.tile(unit, state)`. Node API: `require('./patterns/karakusa.js')` from the project root.
+- `tile` takes a positive finite base unit and positive finite `state.stroke`, plus a trusted line-color string. It returns `{ w, h, markup }` as before. Invalid numeric inputs throw `RangeError`. Future untrusted imports must validate color/content before calling renderers.
+- `paths` and `leaves` expose deeply frozen fit records. `buildGeometry()` returns fresh cubic/quadratic control points in reference coordinates; changing returned arrays cannot mutate the source fit.
+- All eight other generators preserve their immediate pre-refinement outputs. No server, package installation, bundler, or external runtime dependency is required.
 
-Scale width to `W = 4 * frame / repetitions` and height to `WH`. Preserve the selected line color for stems/leaves and background for the frame. Palette inversion in the reference is a separate preset concern, not a reason to reverse the meaning of the controls. Reference-period measurement and input hash are preserved in [the measurement record](data/karakusa-2026-10-28/reference-measurement.json).
+Example from the project root:
 
-## Backbone coordinates
-
-Coordinates below are normalized by `W`; `H = 179/278`. Each row lists the cubic's four control points. These are chosen construction parameters, not traced historical constants.
-
-| Segment | P0 | P1 | P2 | P3 |
-| --- | --- | --- | --- | --- |
-| Horizontal 0 | `(0,.36)` | `(.10,.36)` | `(.15,.44)` | `(.30,.40)` |
-| Horizontal 1 | `(.30,.40)` | `(.45,.36)` | `(.49,.24)` | `(.65,.28)` |
-| Horizontal 2 | `(.65,.28)` | `(.81,.32)` | `(.90,.36)` | `(1,.36)` |
-| Vertical 0 | `(.30,.40)` | `(.19,.46)` | `(.29,.60)` | `(.45,.60)` |
-| Vertical 1 | `(.45,.60)` | `(.61,.60)` | `(.41,.34+H)` | `(.30,.40+H)` |
-
-Horizontal end minus start is `(1,0)`; vertical end minus start is `(0,H)`. Endpoint derivative vectors, and derivatives at internal joins, agree because the corresponding end/start handle differences agree. The vertical start shares Horizontal 0's endpoint, so the translated graph is connected in both directions.
-
-## Curve equations
-
-For a cubic with points `P0..P3`, evaluate:
-
-```text
-B(t) = (1-t)^3 P0 + 3(1-t)^2 t P1 + 3(1-t)t^2 P2 + t^3 P3
-B'(t) = 3(1-t)^2(P1-P0) + 6(1-t)t(P2-P1) + 3t^2(P3-P2)
+```javascript
+const karakusa = require('./patterns/karakusa.js');
+const tile = karakusa.tile(40, { line: '#2a5db1', stroke: 1.6 });
+console.log(tile.w, tile.h); // 160, 103.0216
 ```
 
-For each inward spiral:
+## What the mathematics reproduces
+
+For this organic motif, the reproducible model is a fitted knot graph plus spline interpolation and periodic translation. The knot coordinates describe one selected reference variant; they are not historical constants or an inferred original artisan algorithm. The canonical coordinates and parent relationships live in the runtime module, not in a second copied implementation.
+
+Let the reference cell be `278 x 179`. Its approximate ratio comes from the earlier binary repeat measurement, preserved in [the measurement record](data/karakusa-2026-10-28/reference-measurement.json). Map it to the current global base unit:
 
 ```text
-rho(t) = R * (1 - 0.92t^2)
-theta(t) = theta0 + winding * 2*pi*turns*t
-S(t) = center + rho(t) * (cos(theta), sin(theta))
-rho'(t) = -1.84Rt
-omega = winding * 2*pi*turns
-S'(t) = (rho' cos(theta) - rho*omega sin(theta),
-         rho' sin(theta) + rho*omega cos(theta))
+u = frame / repetitions
+W = 4u
+scale = W / 278
+H = 179 * scale
+repeat vectors = (W, 0), (0, H)
 ```
 
-For interval `[a,b]`, export cubic points `S(a)`, `S(a)+(b-a)S'(a)/3`, `S(b)-(b-a)S'(b)/3`, `S(b)`. Use `ceil(12*turns)` equal intervals, at most 30 degrees per interval. This is a cubic Hermite approximation of the polar spiral; the exported curves are themselves precise editable Beziers. The quadratic radial profile keeps the outside of each curl fuller than linear shrinkage. It ends at radius `0.08R` rather than collapsing to a singular center.
+Each branch is a list of measured/fitted knots. For consecutive knots `P[i]`, `P[i+1]`, use uniform Catmull-Rom conversion to cubic Bezier control points:
 
-| Curl | Source segment / t | Center | R | Start angle | Winding | Turns |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | Horizontal 0 / .50 | `(.11,.18)` | .145 | pi/2 | +1 | 1.55 |
-| 1 | Horizontal 1 / .25 | `(.40,.16)` | .145 | pi/2 | +1 | 1.45 |
-| 2 | Horizontal 2 / .55 | `(.79,.12)` | .160 | pi/2 | -1 | 1.55 |
-| 3 | Horizontal 0 / .15 | `(.10,.54)` | .110 | -pi/2 | +1 | 1.40 |
-| 4 | Horizontal 1 / .65 | `(.60,.48)` | .140 | -pi/2 | -1 | 1.50 |
-| 5 | Horizontal 2 / .92 | `(.88,.53)` | .110 | -pi/2 | -1 | 1.40 |
-| 6 | Vertical 1 / .65 | `(.59,.10+H)` | .065 | pi/2 | +1 | 1.35 |
-| 7 | Vertical 1 / .25 | `(.61,.66)` | .055 | pi | +1 | 1.30 |
+```text
+C1 = P[i]   + (P[i+1] - P[i-1]) / 6
+C2 = P[i+1] - (P[i+2] - P[i])   / 6
 
-A connector cubic joins source point `A=B(t)` to `S(0)`. Its first handle follows the source tangent; its last handle approaches along the initial spiral tangent. Handle length is `min(.06, .45*distance(A,S(0)))` in normalized coordinates. Direction continuity is enforced; connector/spiral handle lengths need not match, so this join is G1 rather than uniformly parameterized C1. Internal spiral joins are C1.
+B(t) = (1-t)^3 P[i] + 3(1-t)^2 t C1
+     + 3(1-t)t^2 C2 + t^3 P[i+1],  0 <= t <= 1
+```
 
-## Leaves and finite tiling
+Clamp missing neighbor knots to the endpoint itself. Adjacent segments interpolate the same knot and share the same first derivative; the compiled geometry is C1 continuous within each path. SVG coordinates retain the existing four-decimal serialization precision.
 
-Eight leaves attach at Horizontal 0/.74, Horizontal 1/.13 and .80, Horizontal 2/.30 and .75, Vertical 0/.55, and Vertical 1/.50 and .85. Rotate the source tangent by alternating signed `0.9` radians (signs `-, -, +, -, +, +, -, +`). Leaf length is `.06W`. Two quadratic curves connect base to tip and back, using controls at half length plus/minus `.018W` along the leaf normal. Fill leaves in the selected line color without a stroke.
+## Branches, leaves, and seams
 
-Start with translated motif copies at columns/rows `-1..1`. Conservative control-point hull bounds, padded by half the effective stroke, exclude paths that cannot intersect the cell. The default tile emits 25 paths rather than all 162 paths from nine complete 18-part motifs. This pruning preserves edge-crossing curls and the vertical connector. Tests compare it against an unpruned periodic field; source-part attributes support inspection and do not create document-ID collisions.
+Each of the sixteen paths names a parent path and knot index. Its starting point equals that parent knot, optionally translated by an integer cell period. Three joins cross the vertical period: `curl-0` from `curl-12`, `curl-6` from `curl-5`, and `curl-14` from `curl-13`, each shifted by `(0,-179)` in reference coordinates. Tests verify these relationships and that every branch reaches the same periodic central cycle.
 
-Effective stem stroke is `min(requested stroke, .018W)`, with round caps/joins. The card and formula tab disclose this limit. Accent is unused. Background remains an exporter frame property, not a mask within the vines. The current exporter still paints an opaque frame; no transparent-export UI was added.
+Branches share positions (C0 attachment), while the directions may diverge at a fork. Requiring every branch to share its parent's tangent was a prototype simplification that produced incorrect connectors. Each individual fitted path remains internally smooth. The model does not assert that all horizontally repeated vines form one global connected component.
 
-## Evidence and checks
+Eight leaves use parent knots as bases and fitted tip coordinates. Two quadratic curves close each leaf. Their controls sit at the base/tip midpoint, offset by the recorded width along its perpendicular. Leaves are filled in the selected line color without a stroke.
 
-Run from `_CODE`:
+Control-point hull bounds, padded by half the effective stroke, determine which translated copies can intersect the cell. Translation ranges are calculated per path rather than assuming a fixed stencil. Thus curves crossing a tile edge continue as translated pieces of the same curve. The default tile emits 33 paths from 24 logical parts; it does not emit every full neighboring motif.
+
+## Controls and limits
+
+- Line color controls both branches and leaves. Background remains an exporter-frame property; no background masks are embedded in the motif. Accent is unused.
+- Effective stroke remains `min(requested stroke, 0.018W)`, with round caps and joins. The existing card and formula notes disclose the cap.
+- Cell dimensions and global size/repetition behavior are unchanged from v2. The composition and SVG paths change; existing SVG files remain untouched.
+- The source palette is light vines on blue. App defaults preserve the meaning of the global color controls; comparison artifacts use a reference-like palette explicitly.
+- Individual curl radius/turn controls are not provided: this fit uses knots, not generic polar spirals. Any future local shape editor must preserve shared anchors and periodic joins.
+- The exporter still paints an opaque frame. No transparent-export UI, freeform path editor, or historical metadata system was added.
+
+## Validation
+
+From `_CODE`:
 
 ```powershell
 node --test _Vectors/tests/yagasuri.test.cjs _Vectors/tests/seigaiha.test.cjs _Vectors/tests/shippo.test.cjs _Vectors/tests/karakusa.test.cjs
+node _Vectors/tests/browser-karakusa.cjs --out _docs/data/karakusa-refinement-2026-10-28
 ```
 
-The combined suite has 27 passing tests. Karakusa checks cover periodic positions/derivatives, every curl's source attachment and tangent, spiral approximation, closed leaf anchoring, pruned versus unpruned periodic coverage, finite/deterministic supported sizes, stroke limits, unused-control behavior, invalid units/strokes, formula notes, JavaScript syntax, and byte-identical output from the other eight generators at baseline settings.
+The combined Node suite has 28 passing tests. Karakusa checks cover graph attachment, periodic joins, knot interpolation, internal derivatives, closed leaf anchoring, exported control points, pruned versus unpruned coverage, immutable source/fresh outputs, supported sizes, invalid inputs, colors, unused controls, formula notes, JavaScript syntax, and the eight other generators' baseline outputs.
 
-[Edge results](data/karakusa-2026-10-28/browser-results.json) record 54 passing assertions under each of Steel Night, Paper Mint, and Neon Grid: gallery counts 9/20/27, eighteen size/density/stroke combinations, line/background/accent behavior, intercepted copy/download content and object-URL cleanup, formula open/tab/Escape, theme selection, and no captured page errors. SVG-pattern versus explicit unpruned-field rasterization has zero unmatched foreground pixels with a one-pixel antialias tolerance. Raw color differences affect about 12.05% of pixels because edge smoothing differs; strict per-channel equality initially failed and is not claimed. Both diagnostic SVGs were explicitly sized to 240 by 240 pixels. This check tests coverage, not exact raster color equality or fidelity to the historical reference.
+The retained app-specific browser runner needs Node and Microsoft Edge on Windows. Set `BROWSER_PATH` to another compatible Chromium executable if needed. It accepts `--out` only inside this project's `_docs/data/`; failures exit nonzero and record available reports. A temporary instrumented HTML copy is removed afterward. Fresh browser profiles remain under the OS temporary directory (`vectors-karakusa-qa-*`); they are not source or deployment inputs. The JPEG is embedded into the local test copy as a data URL for origin-clean canvas comparisons without weakening browser file-access settings.
 
-See the [comparison](data/karakusa-2026-10-28/comparison.html), [capture](data/karakusa-2026-10-28/comparison.png), [standalone SVG](data/karakusa-2026-10-28/karakusa-after.svg), and [artifact index](data/karakusa-2026-10-28/README.md). Comparison panels use light vines on blue to match the source palette; app defaults still use the global controls. The source-scale panel uses approximately the measured repeat size. Neither it nor the mathematical tests establish an exact reference match.
+[Browser results](data/karakusa-refinement-2026-10-28/browser-results.json) record 55 passing checks per theme (Steel Night, Paper Mint, Neon Grid), including eighteen control combinations, reference-fit improvement, repeated-field foreground coverage within one-pixel antialias tolerance, recoloring, intercepted copy/download content, formula interactions, theme selection, gallery counts 9/20/27, and no captured page errors. Save navigation and clipboard are stubbed, so native permissions and actual file saving remain untested.
 
-## Remaining acceptance and performance
+The reference metric uses the upper-left 278-by-179 image cell, white foreground above 180 in each RGB channel, and symmetric precision/recall with a two-pixel square-neighborhood tolerance. Both candidates use equivalent cell scale and approximately 3.8-pixel stroke. The runner requires an F1 gain of at least 0.15 over v2; the observed gain is 0.320. The metric is for this selected cell, not the entire world's Karakusa variants.
 
-The reference has a denser, less visibly row-based arrangement and different local curl/branch shapes. Current work corrects disconnected topology and supplies a reproducible editable construction; further visual fitting remains necessary before declaring the pattern reference-matched. Preserve this candidate and the original baseline for comparison.
+## Performance and remaining acceptance
 
-Geometry is bounded and neighboring paths are pruned, but this candidate contains more curve data than the earlier sparse generator. Across the three headless sessions, 66 synchronous whole-gallery input rebuilds per theme had medians of 6.8-8.4 ms and a maximum of 38.3 ms on this machine. These samples exclude paint/frame latency and do not establish a speedup or performance guarantee. The future selected-pattern workspace should avoid rebuilding inactive patterns.
+The default motif markup grows from about 13.9 KB (v2) to 17.9 KB (v3), reflecting more fitted paths. In these headless sessions, 66 synchronous gallery rebuild samples per theme had medians of 10.8-14.0 ms and a maximum of 59.3 ms. These measurements exclude paint/frame latency and are not a controlled before/after benchmark. The future workspace should render only the selected pattern during editing.
 
-Native save/clipboard permissions, external-editor compatibility, non-Chromium rendering, comprehensive accessibility, and full theme compliance remain separate checks. Original app chrome contains fixed colors; the new formula tab reuses the existing component and blue/white artwork conventions. No historical provenance or rights have been established by this reconstruction.
+Final curve/palette review, non-Chromium behavior, external SVG-editor imports, native save/clipboard permissions, and comprehensive accessibility/theme acceptance remain open. Reference-image similarity has improved substantially, while exact tracing and historical authenticity are not claimed. Next work can separate the remaining generators and serialization contracts, then add reference presets before the workspace redesign.

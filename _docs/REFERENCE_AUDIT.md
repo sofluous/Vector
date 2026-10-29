@@ -24,7 +24,7 @@ Repeat descriptions below are proposed construction models inferred from the sup
 | Ichimatsu / `Ichimatsu.jpg` | Alternating light/blue squares; two-by-two square parity cell | Baseline topology is recognizable; current accent fills the reference's light squares. Provide a reference palette, then review scale and parity. Texture/irregularity is out of scope. |
 | Shippo / `Shippo.jpg` | Four diagonal lens petals around light circular spaces, repeated on a square lattice | Baseline rotated field produces dense star/diamond shapes and extra outlines. Subsequent [correction](SHIPPO_CONSTRUCTION.md) constructs direct equal-circle lenses with open tips and an unrotated square repeat; final proportions await review. |
 | Kikko / `Kikko.jpg` | Concentric hexagonal rings on staggered centers, broad blue ground and light channels; rectangular two-row supercell | User considers it good. Freeze geometry, but exact reference palette, ring count, line widths, and negative-space balance remain unverified. |
-| Karakusa / `Karakusa.jpg` | Connected sweeping stems, multiple inward curls, small leaf accents; visible larger repeated composition | Baseline is sparse disconnected rows. A later [experimental graph](KARAKUSA_CONSTRUCTION.md) uses an estimated 278:179 composition ratio and tested periodic stems/curls/leaves. Exact arrangement and local curve fitting remain unresolved; not reference-matched. |
+| Karakusa / `Karakusa.jpg` | Connected sweeping stems, multiple inward curls, small leaf accents; visible larger repeated composition | Baseline is sparse disconnected rows. The later [reference-fitted spline graph](KARAKUSA_CONSTRUCTION.md) uses the estimated 278:179 cell and measured landmarks. Foreground F1 improves 0.440 to 0.760 versus the intermediate prototype at two-pixel tolerance; exact equivalence and provenance remain unverified. |
 | Uroko / `Uroko.jpg` | Filled upright triangles separated by light inverted triangular spaces; staggered triangular lattice | User considers it good. Freeze baseline; review edge padding/negative space and density separately from color variation. |
 | Mameshibori / `Mameshibori.jpg` | Approximately uniform small dots on a regular rectangular grid | Baseline introduces periodic larger dots and accent-color hierarchy absent from the dominant reference structure. Add a uniform-dot reference preset; retain hierarchy only as an explicit variation. |
 
@@ -32,7 +32,7 @@ Repeat descriptions below are proposed construction models inferred from the sup
 
 1. Finish review of the Yagasuri pilot against the specified geometry and chosen proportions.
 2. Seigaiha and Shippo corrections are implemented with tests; review their proportions and external-editor compatibility.
-3. Refine Karakusa's experimental motif graph against the reference. Connectivity and periodic seams are tested, but arrangement/curl shapes still differ.
+3. Review Karakusa's reference-fitted motif and local residual differences, plus external-editor compatibility. Preserve the earlier prototype and measurements; do not equate tolerance-based improvement with exact authenticity.
 4. Add reference palettes/presets for Ichimatsu and Mameshibori. Do not silently change the three user-favored baselines.
 
 No entry is certified historically accurate or production-compatible across SVG editors. Geometry candidates must pass repeat tests, visual reference review, and independent export checks. Cultural context and rights metadata require further research.

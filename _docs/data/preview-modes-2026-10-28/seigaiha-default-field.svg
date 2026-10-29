@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480">
+      <defs><pattern id="field_seigaiha_2" patternUnits="userSpaceOnUse" width="40" height="20" viewBox="0 0 100 50">
+        <path d="M -150 0 A 50 50 0 0 1 -50 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -150 0 A 50 50 0 0 1 -50 0 M -138 0 A 38 38 0 0 1 -62 0 M -126 0 A 26 26 0 0 1 -74 0 M -114 0 A 14 14 0 0 1 -86 0" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -50 0 A 50 50 0 0 1 50 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -50 0 A 50 50 0 0 1 50 0 M -38 0 A 38 38 0 0 1 38 0 M -26 0 A 26 26 0 0 1 26 0 M -14 0 A 14 14 0 0 1 14 0" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 50 0 A 50 50 0 0 1 150 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 50 0 A 50 50 0 0 1 150 0 M 62 0 A 38 38 0 0 1 138 0 M 74 0 A 26 26 0 0 1 126 0 M 86 0 A 14 14 0 0 1 114 0" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -100 25 A 50 50 0 0 1 0 25 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -100 25 A 50 50 0 0 1 0 25 M -88 25 A 38 38 0 0 1 -12 25 M -76 25 A 26 26 0 0 1 -24 25 M -64 25 A 14 14 0 0 1 -36 25" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 0 25 A 50 50 0 0 1 100 25 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 0 25 A 50 50 0 0 1 100 25 M 12 25 A 38 38 0 0 1 88 25 M 24 25 A 26 26 0 0 1 76 25 M 36 25 A 14 14 0 0 1 64 25" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 100 25 A 50 50 0 0 1 200 25 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 100 25 A 50 50 0 0 1 200 25 M 112 25 A 38 38 0 0 1 188 25 M 124 25 A 26 26 0 0 1 176 25 M 136 25 A 14 14 0 0 1 164 25" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -150 50 A 50 50 0 0 1 -50 50 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -150 50 A 50 50 0 0 1 -50 50 M -138 50 A 38 38 0 0 1 -62 50 M -126 50 A 26 26 0 0 1 -74 50 M -114 50 A 14 14 0 0 1 -86 50" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -50 50 A 50 50 0 0 1 50 50 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -50 50 A 50 50 0 0 1 50 50 M -38 50 A 38 38 0 0 1 38 50 M -26 50 A 26 26 0 0 1 26 50 M -14 50 A 14 14 0 0 1 14 50" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 50 50 A 50 50 0 0 1 150 50 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 50 50 A 50 50 0 0 1 150 50 M 62 50 A 38 38 0 0 1 138 50 M 74 50 A 26 26 0 0 1 126 50 M 86 50 A 14 14 0 0 1 114 50" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -100 75 A 50 50 0 0 1 0 75 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -100 75 A 50 50 0 0 1 0 75 M -88 75 A 38 38 0 0 1 -12 75 M -76 75 A 26 26 0 0 1 -24 75 M -64 75 A 14 14 0 0 1 -36 75" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 0 75 A 50 50 0 0 1 100 75 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 0 75 A 50 50 0 0 1 100 75 M 12 75 A 38 38 0 0 1 88 75 M 24 75 A 26 26 0 0 1 76 75 M 36 75 A 14 14 0 0 1 64 75" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 100 75 A 50 50 0 0 1 200 75 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 100 75 A 50 50 0 0 1 200 75 M 112 75 A 38 38 0 0 1 188 75 M 124 75 A 26 26 0 0 1 176 75 M 136 75 A 14 14 0 0 1 164 75" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -150 100 A 50 50 0 0 1 -50 100 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -150 100 A 50 50 0 0 1 -50 100 M -138 100 A 38 38 0 0 1 -62 100 M -126 100 A 26 26 0 0 1 -74 100 M -114 100 A 14 14 0 0 1 -86 100" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M -50 100 A 50 50 0 0 1 50 100 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -50 100 A 50 50 0 0 1 50 100 M -38 100 A 38 38 0 0 1 38 100 M -26 100 A 26 26 0 0 1 26 100 M -14 100 A 14 14 0 0 1 14 100" fill="none" stroke="#2a5db1" stroke-width="4"/><path d="M 50 100 A 50 50 0 0 1 150 100 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 50 100 A 50 50 0 0 1 150 100 M 62 100 A 38 38 0 0 1 138 100 M 74 100 A 26 26 0 0 1 126 100 M 86 100 A 14 14 0 0 1 114 100" fill="none" stroke="#2a5db1" stroke-width="4"/>
+      </pattern></defs>
+      <rect width="480" height="480" fill="#ffffff"/>
+      <rect width="480" height="480" fill="url(#field_seigaiha_2)"/>
+    </svg>
