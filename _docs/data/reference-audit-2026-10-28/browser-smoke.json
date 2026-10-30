@@ -1,8 +1,0 @@
-{
-  "browser": "Microsoft Edge headless",
-  "patternGallery": 9,
-  "staticGallery": 20,
-  "projectLogoGallery": 27,
-  "updatedYagasuri": true,
-  "scope": "Initial local-file render; no interaction/export clipboard or cross-browser acceptance"
-}
