@@ -126,3 +126,19 @@
 - Transferred four formula explanations into an independent immutable content module; added live native-generator diagrams, explicit pending derivations and selected reference/review context for all nine patterns. Diagram SVG IDs are independent of the hidden preview.
 - Added centered 25%-400% preview zoom and Fit; SVG export bytes, native tessellations and output dimensions remain unchanged. Export/view controls stay in Preview.
 - Validation: 61 Node tests and 193 Edge checks per nine theme/viewport combinations; syntax and whitespace checks pass. Updated roadmap: workflow/editor review and primary-entry retirement are next.
+
+## 2026-10-29 - Make workspace the main entry
+
+- Replaced the legacy lab/static/logo gallery page with the complete workspace at `index.html`. Retained `workspace.html` as a small bookmark redirect preserving query/fragment, with a plain-link fallback.
+- Moved formula assertions off legacy HTML and onto the content module plus a required text fixture. Retired the lab-only browser harness; transferred its Karakusa reference-fit improvement measurement to the current workspace runner. Added entry/resource/redirect regression tests.
+- Reviewed cleanup consumers: root `tests/` and fixtures remain required infrastructure; legacy split theme assets and documentation relocation remain deferred with explicit consumers/validation in Roadmap. Removed broad `_docs/` ignore and narrowly ignored temporary instrumented browser pages. Documented delivery inputs separately; no packaging/deployment was added.
+- External-editor round trips and candidate/reference acceptance remain open; native tessellations, view-specific exports and artwork defaults are unchanged.
+
+- Final validation: 63 Node tests; 195 Edge checks in each of nine theme/viewport cases; entry-resource/script parsing and git diff --check pass. Selected screenshots reviewed; reference-fit improvement preserved.
+
+## 2026-10-29 - Unify Vectors landing
+
+- Removed `workspace.html`; the main `index.html` landing is the single application entry. Updated its title to Vectors | Pattern Library.
+- Updated browser smoke checks, entry tests and current documentation to use the main landing directly. Runtime editing module names remain internal implementation details. Historical reports remain unchanged.
+
+- Final single-entry validation: 63 Node tests pass; all nine direct-landing Edge cases pass with 195 checks each. Resource/script parsing and git diff --check pass.

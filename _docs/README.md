@@ -31,7 +31,7 @@ Tracks product direction, current implementation, proposed development, validati
 
 - [Workspace session model](WORKSPACE_SESSION.md): implemented state/capability APIs, examples, validation and UI integration responsibilities.
 
-- [Opt-in workspace](WORKSPACE_UI.md): grouped browsing, paired inspector controls, responsive behavior, browser checks and legacy retirement direction.
+- [Pattern workspace](WORKSPACE_UI.md): grouped browsing, paired inspector controls, responsive behavior, browser checks and legacy retirement direction.
 
 - [Density and seamless output](DENSITY_AND_TILING.md): density 1, natural cell aspect, whole-field repetition, APIs and compatibility.
 
@@ -39,8 +39,23 @@ Tracks product direction, current implementation, proposed development, validati
 
 - [Compact workspace](COMPACT_WORKSPACE.md): readable gallery previews, toolbar/Info layout, fitted preview, responsive panels and validation.
 
-- [Square arrangements](SQUARE_ARRANGEMENTS.md): authorized all-square layouts, unchanged motif geometry, Shift X/Y, Center, tests and compatibility.
+- [Rejected square-arrangement experiment](SQUARE_ARRANGEMENTS.md): historical evidence; superseded by the tessellation contract.
 
 - [Current tessellation contract](TESSELLATION.md): native lattice spacing/connections, phase controls, and unresolved square-export constraints. Supersedes the rejected square-packing experiment.
 
 - [Workspace inspection](WORKSPACE_INSPECTION.md): Construction/Context tabs, selected reference/review content and preview-only Fit/zoom.
+
+## Running and validating the app
+
+Open `index.html` for the primary workspace. The separate `workspace.html` entry is removed; use the project root or `index.html`. Static-vector/logo galleries are retired. There is no configured build/lint/CI/deployment pipeline.
+
+From the `_CODE` workspace parent:
+
+```powershell
+node --test _Vectors/tests/*.test.cjs
+node _Vectors/tests/browser-workspace.cjs --out _docs/data/primary-entry-2026-10-29
+```
+
+Node is required for automated tests; the browser runner also needs Edge (override with `BROWSER_PATH`). `tests/` is essential regression/acceptance infrastructure and stays in the project root. `tests/fixtures/` holds the transferred construction-text contract. Some historical SVG/JSON files in `_docs/data/` are required test fixtures, not disposable output. Browser screenshots and reports are intentionally retained evidence; temporary instrumented `.workspace-qa-*.html` files are ignored narrowly and cleaned by the runner. The former lab-only `browser-karakusa.cjs` is retired; its reference-fit check now runs in `browser-workspace.cjs`.
+
+Supporting `notes/`, `tests/` or `scripts/` folders under `_docs` should be introduced only when material needs them; none were created for this entry migration. See the cleanup backlog in [Roadmap](ROADMAP.md) and runtime delivery inputs in [Product](PRODUCT.md). Git ignore rules do not control deployment inclusion.

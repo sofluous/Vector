@@ -23,7 +23,7 @@ The library uses compact two-column cards inside the existing construction group
 
 ## Files and Design System
 
-`workspace.html`, `workspace.js`, `css/workspace.css`, and the thumbnail helper in `patterns/presentation.js` implement this refinement. Typography, spacing, surfaces, borders, focus, controls and status colors use the bundled DS tokens. The control bar uses native form controls with accessible names; no new icons or dependencies were added. Left native disclosure arrows remain the previously documented initial exception to terminal/right collapse placement.
+`index.html`, `workspace.js`, `css/workspace.css`, and the thumbnail helper in `patterns/presentation.js` implement this refinement. Typography, spacing, surfaces, borders, focus, controls and status colors use the bundled DS tokens. The control bar uses native form controls with accessible names; no new icons or dependencies were added. Left native disclosure arrows remain the previously documented initial exception to terminal/right collapse placement.
 
 The compact layout preserves proportions. The square motif-packing experiment was rejected; [native tessellations](TESSELLATION.md) now govern Tile/Pattern and gallery content. Motif/Tile/Pattern explanations are available on demand. Subsequent geometry clarification removes square-only repeat composites while keeping motif proportions and the square browse crop intact. Construction/Context content, zoom and default-entry/old-gallery retirement remain separate roadmap work.
 

@@ -16,10 +16,7 @@ test('all patterns have bounded explicit review content and existing local refer
   }
   assert.throws(() => content.get('missing'), RangeError);
 });
-test('transferred formula notes retain the four existing construction explanations', () => {
-  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-  for (const id of ['asanoha','shippo','seigaiha','karakusa']) {
-    const text = html.match(new RegExp(`data-formula-body="${id}"[^>]*>[\\s\\S]*?<pre>([\\s\\S]*?)</pre>`))[1];
-    assert.equal(content.get(id).construction, text.replaceAll('\r\n', '\n'));
-  }
+test('construction notes preserve the transferred formula contract', () => {
+  const notes = require('./fixtures/construction-notes.json');
+  for (const [id, text] of Object.entries(notes)) assert.equal(content.get(id).construction, text);
 });

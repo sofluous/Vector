@@ -1,10 +1,10 @@
 # Product
 
 ## Goal and status
-Become a curated repository of patterns and textures from around the world: understand their context and mathematical construction, edit their properties, and export precise, editable SVGs. This direction comes from [the scratchpad](data/scratchpad.md). The workspace/data contracts below remain proposed; the reference audit and four generator candidates, including a reference-fitted Karakusa reconstruction, await final visual/editor acceptance.
+Become a curated repository of patterns and textures from around the world: understand their context and mathematical construction, edit their properties, and export precise, editable SVGs. This direction comes from [the scratchpad](data/scratchpad.md). The selected-pattern workspace and its editing/export contracts are implemented; the reference audit and four generator candidates, including a reference-fitted Karakusa reconstruction, await final visual/editor acceptance.
 
 ## Current implementation
-- [Workspace session and capability modules](WORKSPACE_SESSION.md) provide independent immutable artwork state, selection, reset, view settings, and supported-control metadata. They are connected to the opt-in `workspace.html` page.
+- [Workspace session and capability modules](WORKSPACE_SESSION.md) provide independent immutable artwork state, selection, reset, view settings, and supported-control metadata. They power the single `index.html` Vectors landing page.
 - Dependency-free browser page in `index.html` with DOM/session state; pure catalog/generators, strict export validation, and SVG serialization now live in `patterns/`. See [generator contracts](GENERATOR_CONTRACTS.md).
 - Nine Japanese pattern generators: Asanoha, Yagasuri, Seigaiha, Ichimatsu, Shippo, Kikko, Karakusa, Uroko, and Mameshibori.
 - Workspace [density and tiling](DENSITY_AND_TILING.md) supports 1-36 genuine native repeat cells per axis; output height follows the native cell aspect ratio. Density 1 in Pattern matches Tile view. [Motif view](MOTIF_TILE_PATTERN.md) separately shows a complete uncropped shape; workspace tiles preserve the [original tessellations](TESSELLATION.md), including native lattice spacing and connections.
@@ -12,18 +12,18 @@ Become a curated repository of patterns and textures from around the world: unde
 - Arrangement controls Shift X/Y and Center provide wrapped repeat-phase adjustment independently per pattern; Motif ignores shifts.
 - Workspace library groups the Japanese collection by construction with search and compact thumbnails. The inspector groups layout, palette, variation and linework with paired sliders/numeric values and color pickers/hex input.
 - Optional per-card reference variants for Ichimatsu and Mameshibori preserve original defaults.
-- Global controls for repetition, stroke width, line/accent/background colors, and square frame size; copy/download SVG actions.
-- Formula panels for Asanoha, Shippo, Seigaiha, and Karakusa; separate static vector and project logo galleries.
+- Selected-pattern controls for density, output width, colors, supported stroke, and shifts; copy/download SVG actions.
+- Construction/Context tabs with four transferred formula explanations, native generator diagrams and selected reference/review status. The static-vector and logo galleries are retired.
 - Reference images and saved research links in `_references/Japanese/`. Their presence does not establish attribution, accuracy, or reuse permission.
 - A [nine-pattern reference audit](REFERENCE_AUDIT.md) and [Yagasuri construction pilot](YAGASURI_CONSTRUCTION.md), with a corrected paired-vane/staggered-repeat generator and dependency-free Node regression tests.
 - A [Seigaiha construction correction](SEIGAIHA_CONSTRUCTION.md): four-ring fans with foreground occlusion, a rectangular two-row repeat, fixed ring count, and a documented stroke cap. Its formula panel now matches the generator.
 - A [Shippo construction correction](SHIPPO_CONSTRUCTION.md): four direct diagonal equal-circle lenses, small tip gaps, and an unrotated square repeat without clips or guide outlines. Stroke/accent controls are unused and documented.
 - A [reference-fitted Karakusa reconstruction](KARAKUSA_CONSTRUCTION.md): sixteen spline paths, shared periodic branch anchors, and eight pointed leaves. Its foreground reference-fit F1 improves from 0.440 to 0.760 at a documented two-pixel tolerance. This is a selected-variant spline model, not a universal historical formula. Effective stroke is capped and accent unused. Five remaining generators retain original audit outputs.
 
-Pattern definitions currently contain `id`, `name`, `desc`, and `tile(unit, state)`, returning width, height, and SVG markup. Export repeats this tile inside a frame. Static vectors separately use `id`, `name`, `desc`, `viewBox`, and `markup`.
+Pattern definitions currently contain `id`, `name`, `desc`, and `tile(unit, state)`, returning width, height, and SVG markup. Export repeats this tile inside a frame. The retired static-vector and logo records are no longer part of the runtime.
 
 ## Proposed workflow and architecture
-See the [workspace implementation plan](WORKSPACE_PLAN.md) for state semantics, supported controls, staged delivery, and review gates. An [opt-in workspace](WORKSPACE_UI.md) now provides gallery selection, field preview and inspector; the current lab still uses global controls. Motif/Tile/Pattern inspection is implemented; Construction/Context tabs and zoom remain proposed.
+See the [workspace implementation plan](WORKSPACE_PLAN.md) for state semantics, supported controls, staged delivery, and review gates. The [primary workspace](WORKSPACE_UI.md) provides gallery selection, contextual editing, Motif/Tile/Pattern, Construction/Context and centered Fit/zoom. The old lab/gallery UI is retired.
 
 Browse a searchable gallery, select one pattern, edit it in a central preview with a contextual property inspector, inspect Construction and Context tabs, then export. Construction should explain coordinates, symbols, equations, repeat vectors, and an illustrated derivation. Context should contain sourced historical/cultural details and explicit uncertainty.
 
@@ -58,3 +58,11 @@ Expose size, color, stroke, fill, tiling, and density only where meaningful. Def
 ## Selected-pattern inspection
 
 [Construction/Context tabs and centered Fit/zoom](WORKSPACE_INSPECTION.md) are implemented in the opt-in workspace. Four existing formula explanations are transferred; missing derivations and provenance remain explicit. Preview framing never changes SVG exports.
+
+## Primary entry and delivery - 2026-10-29
+
+Open `index.html` directly or serve the project folder. The separate workspace entry has been removed; there is no secondary app or redirect. Runtime dependencies are `workspace.js`, `css/workspace.css`, `patterns/*.js`, the bundled `design-system/theme.css` and theme scripts, plus selected local reference JPGs for Context links. The app needs no framework, build, server or network connection for its main workflow.
+
+There is no configured packaging/deployment pipeline. For a runtime-only delivery, include `index.html`, workspace code, pattern modules, bundled Design System runtime files and nine local reference JPGs; exclude `_docs`, `tests`, `.git`, and unused legacy CSS from the delivery copy. Publishing the entire repository would expose documentation/evidence too; `.gitignore` is not a deployment filter. No deployment was performed. Reference redistribution rights remain unverified.
+
+External-editor imports remain unverified. Making the workspace the default is a navigation change, not acceptance of historical authenticity or SVG-editor interoperability.

@@ -200,12 +200,11 @@ test('invalid inputs fail explicitly and all other generators retain the refinem
   for(const p of patterns.filter(p=>p.id!=='karakusa'))assert.equal(JSON.stringify(p.tile(40,baseline[p.id].state)),JSON.stringify(baseline[p.id].tile),p.id);
 });
 
-test('formula documents the fitted spline and both runtime scripts parse', () => {
+test('formula documents the fitted spline and the geometry module parses', () => {
   assert.match(source, /patterns\/karakusa\.js/);
-  assert.match(source, /Reference-fitted spline reconstruction/);
-  assert.match(source, /Branches share positions, not tangents/);
-  const section=source.match(/data-formula-body="karakusa">([\s\S]*?)<\/section>/)[1];
+  assert.match(require('../patterns/content.js').get('karakusa').construction, /Reference-fitted spline reconstruction/);
+  assert.match(require('../patterns/content.js').get('karakusa').construction, /Branches share positions, not tangents/);
+  const section = require('../patterns/content.js').get('karakusa').construction;
   assert.doesNotMatch(section,/rho\(t\)|Eight curls/);
   new vm.Script(fs.readFileSync(path.join(root,'patterns/karakusa.js'),'utf8'));
-  for(const match of source.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(match[1].trim())new vm.Script(match[1]);
 });

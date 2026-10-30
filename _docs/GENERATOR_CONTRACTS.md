@@ -32,7 +32,7 @@ Run from the workspace root:
 
 ```powershell
 node --test _Vectors/tests/*.test.cjs
-node _Vectors/tests/browser-karakusa.cjs --out _docs/data/contracts-2026-10-28
+node _Vectors/tests/browser-workspace.cjs --out _docs/data/primary-entry-2026-10-29
 ```
 
 Node tests cover existing baseline geometry, export bounds/determinism, reference colors and dot spacing. Browser checks additionally cover native selectors, focus restoration, isolated changes, exact original restoration, controls and intercepted export actions across three themes. The existing app chrome remains a Design System migration item; this task adds native controls without redesigning the shell. Final visual acceptance and external editor checks remain open. No build or lint configuration exists.
@@ -51,3 +51,5 @@ PatternPresentation.thumbnail renders a square repeated-field crop at fixed sour
 
 ## Current tessellation presentation
 PatternPresentation delegates Tile/Pattern to PatternSVG.serializeField using native repeatLayout dimensions. Wrapped shiftX/shiftY translate the pattern origin only. The rejected square-layout module was removed. See [API/compatibility](TESSELLATION.md).
+
+2026-10-29: The lab-specific browser runner is retired. The current workspace runner retains the reference-fit improvement check; earlier lab screenshots/counts are historical evidence.

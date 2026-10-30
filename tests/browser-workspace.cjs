@@ -14,7 +14,7 @@ if (!out.startsWith(artifactRoot)) throw Error('Output must be a child of this p
 const browser = process.env.BROWSER_PATH || path.join(process.env['ProgramFiles(x86)'] || 'C:/Program Files (x86)', 'Microsoft/Edge/Application/msedge.exe');
 if (!fs.existsSync(browser)) throw Error('Edge not found. Set BROWSER_PATH to the browser executable.');
 
-async function probe(expected) {
+async function probe(expected, baseline, referenceDataUrl) {
   const checks = [];
   const check = (ok, message) => { if (!ok) throw Error(message); checks.push(message); };
   const result = {passed:false,checks,theme:new URLSearchParams(location.search).get('theme'),width:innerWidth};
@@ -153,7 +153,7 @@ async function probe(expected) {
       document.querySelector('input[name="previewMode"][value="field"]').click();
 
     } finally {URL.createObjectURL=create;URL.revokeObjectURL=revoke;HTMLAnchorElement.prototype.click=click;}
-    check(document.querySelector('a[href="./index.html"]')===null,'Workspace no longer promotes legacy galleries');
+    check(!document.getElementById('staticGallery')&&!document.getElementById('projectGallery')&&!document.getElementById('patternGallery'),'Primary entry contains no legacy galleries');
     check(document.documentElement.scrollWidth<=innerWidth,'No horizontal page overflow');
     check(document.documentElement.scrollHeight<=innerHeight+1,'Expanded panels do not cause page scrolling');
     const stage=el('selectedPreview').getBoundingClientRect();
@@ -163,6 +163,55 @@ async function probe(expected) {
     check(document.querySelectorAll('.pattern-choice[aria-pressed="true"]').length===1,'Exactly one pattern selected');
     check(window.__probeErrors.length===0,'No page errors or unhandled rejections');
 
+    {
+    async function pixels(text, w, h) {
+      const url = URL.createObjectURL(new Blob([text], { type: 'image/svg+xml' }));
+      try {
+        const img = new Image();
+        await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = () => reject(Error('SVG failed to load')); img.src = url; });
+        const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, w, h);
+        return ctx.getImageData(0, 0, w, h).data;
+      } finally { URL.revokeObjectURL(url); }
+    }
+    function fitMask(data, white) {
+      const result = new Uint8Array(data.length / 4);
+      for (let i = 0; i < result.length; i++) result[i] = white ? (data[4*i] > 180 && data[4*i+1] > 180 && data[4*i+2] > 180 ? 1 : 0) : (255-data[4*i] > 48 ? 1 : 0);
+      return result;
+    }
+    function near(mask, x, y, w, h, radius) {
+      for (let yy = Math.max(0,y-radius); yy <= Math.min(h-1,y+radius); yy++) for (let xx = Math.max(0,x-radius); xx <= Math.min(w-1,x+radius); xx++) if (mask[yy*w+xx]) return true;
+      return false;
+    }
+    function fitAgreement(candidate, reference, w, h, radius) {
+      let a = 0, b = 0, hitA = 0, hitB = 0, intersection = 0, union = 0;
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+        const i = y*w+x;
+        if (candidate[i]) { a++; if (near(reference,x,y,w,h,radius)) hitA++; }
+        if (reference[i]) { b++; if (near(candidate,x,y,w,h,radius)) hitB++; }
+        if (candidate[i] && reference[i]) intersection++;
+        if (candidate[i] || reference[i]) union++;
+      }
+      const precision = hitA / Math.max(a,1), recall = hitB / Math.max(b,1);
+      return { precision, recall, f1: 2*precision*recall/Math.max(precision+recall,1e-12), rawIoU: intersection/Math.max(union,1), candidatePixels:a, referencePixels:b };
+    }
+    // Reference comparison is a measured improvement over the preserved v2
+    // prototype, not a historical-authenticity or exact image-match assertion.
+    const model = window.KarakusaPattern;
+    const t = model.tile(69.5,{line:'#ffffff',stroke:3.8});
+    const svg = (tile,viewW,viewH,id) => `<svg xmlns="http://www.w3.org/2000/svg" width="278" height="179" viewBox="0 0 ${viewW} ${viewH}"><defs><pattern id="${id}" patternUnits="userSpaceOnUse" width="${tile.w}" height="${tile.h}">${tile.markup}</pattern></defs><rect width="${viewW}" height="${viewH}" fill="#2a5db1"/><rect width="${viewW}" height="${viewH}" fill="url(#${id})"/></svg>`;
+    const before = {...baseline.tile,markup:baseline.tile.markup.replaceAll('#2a5db1','#ffffff').replace(/stroke-width="[^"]+"/,`stroke-width="${3.8*baseline.tile.w/278}"`)};
+    const image = new Image();
+    await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('Reference image failed to load'));image.src=referenceDataUrl;});
+    const canvas = document.createElement('canvas'); canvas.width=278; canvas.height=179;
+    const ctx=canvas.getContext('2d'); ctx.drawImage(image,0,0,278,179,0,0,278,179);
+    const reference = fitMask(ctx.getImageData(0,0,278,179).data,true);
+    const beforeFit=fitAgreement(fitMask(await pixels(svg(before,before.w,before.h,'before'),278,179),true),reference,278,179,2);
+    const afterFit=fitAgreement(fitMask(await pixels(svg(t,278,179,'after'),278,179),true),reference,278,179,2);
+    result.referenceFit={before:beforeFit,after:afterFit,f1Gain:afterFit.f1-beforeFit.f1,tolerance:'2-pixel square neighborhood on white foreground at the reference-cell scale; not exact agreement'};
+    check(afterFit.f1 > beforeFit.f1+0.15,'Reference-mask F1 improves by at least 15 percentage points over the v2 prototype');
+
+    }
     async function raster(svg,size) {
       const image=new Image();const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));
       try {await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url;});
@@ -209,20 +258,34 @@ async function capture(url,width,screenshot,profile) {
   child.on('error',fail);child.on('exit',code=>fail(Error(`Browser exited ${code}: ${stderr}`)));
   child.stdio[4].on('data',chunk=>{buffer+=chunk.toString();let end;while((end=buffer.indexOf('\0'))>=0){const message=JSON.parse(buffer.slice(0,end));buffer=buffer.slice(end+1);const request=pending.get(message.id);if(request){pending.delete(message.id);message.error?request.reject(Error(JSON.stringify(message.error))):request.resolve(message.result);}}});
   function send(method,params={},sessionId){return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');});}
-  const timer=setTimeout(()=>{fail(Error('Browser test timed out after 30 seconds'));child.kill();},30000);
+  let stage='startup';
+  const timer=setTimeout(()=>{fail(Error(`Browser test timed out after 90 seconds (${stage})`));child.kill();},90000);
   try {
     const {targetId}=await send('Target.createTarget',{url:'about:blank'});
     const {sessionId}=await send('Target.attachToTarget',{targetId,flatten:true});
     await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:false},sessionId);
+
+    stage='main landing';
+    const landing=new URL('index.html',url);landing.search=new URL(url).search;landing.hash='inspection';
+    await send('Page.navigate',{url:landing.href},sessionId);
+    let landingLoaded=false;
+    for(let attempt=0;attempt<50;attempt++) {
+      const loaded=await send('Runtime.evaluate',{expression:`location.pathname.endsWith('/index.html')&&location.search===${JSON.stringify(new URL(url).search)}&&location.hash==='#inspection'&&document.querySelectorAll('[data-pattern]').length===9`,returnByValue:true},sessionId);
+      if(loaded.result?.value){landingLoaded=true;break;}
+      await new Promise(resolve=>setTimeout(resolve,100));
+    }
+    if(!landingLoaded)throw Error('Main landing did not load with query/fragment');
+    stage='workspace probe';
     await send('Page.navigate',{url},sessionId);
     let report;
-    const deadline=Date.now()+25000;
+    const deadline=Date.now()+60000;
     while(Date.now()<deadline){
       const value=await send('Runtime.evaluate',{expression:'document.getElementById("karakusa-probe-report")?.outerHTML || ""',returnByValue:true},sessionId);
       report=value.result?.value;if(report)break;
       await new Promise(resolve=>setTimeout(resolve,100));
     }
     if(!report)throw Error('Missing browser probe report');
+    stage='keyboard and screenshots';
     await send('Page.bringToFront',{},sessionId);
     await send('Emulation.setFocusEmulationEnabled',{enabled:true},sessionId);
     const keys=async(key,code)=>{const windowsVirtualKeyCode={Tab:9,Enter:13,ArrowRight:39}[key];await send('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode,text:key==='Enter'?'\r':''},sessionId);await send('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode},sessionId);};
@@ -234,6 +297,7 @@ async function capture(url,width,screenshot,profile) {
     record.checks.push('Native Tab and Enter select next gallery pattern');
     if(record.width!==width)throw Error(`Expected viewport ${width}, got ${record.width}`);
     record.checks.push('Emulated viewport matches requested CSS width');
+    record.checks.push('Main landing loads directly and preserves query/fragment');
     await send('Runtime.evaluate',{expression:"document.getElementById('tab-preview').focus()"},sessionId);
     await keys('ArrowRight','ArrowRight');
     const tab=await send('Runtime.evaluate',{expression:"document.activeElement.id==='tab-construction'&&!document.getElementById('panel-construction').hidden",returnByValue:true},sessionId);
@@ -292,10 +356,12 @@ async function run() {
   fs.mkdirSync(out,{recursive:true});
   const profiles=fs.mkdtempSync(path.join(os.tmpdir(),'vectors-karakusa-qa-'));
   const scratch=path.join(root,`.workspace-qa-${process.pid}.html`);
-  let html=fs.readFileSync(path.join(root,'workspace.html'),'utf8');
+  let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
   html=html.replace('<head>','<head><script>window.__probeErrors=[];addEventListener("error",e=>window.__probeErrors.push(e.message));addEventListener("unhandledrejection",e=>window.__probeErrors.push(String(e.reason)));</script>');
   const expected=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root,'_docs/data/minimal-repeat-2026-10-28/manifest.json'),'utf8')).records.filter(record=>record.variant==='default'&&record.mode==='field').map(record=>[record.id,fs.readFileSync(path.join(root,'_docs/data/minimal-repeat-2026-10-28',record.filename),'utf8')]));
-  html=html.replace('</body>',`<script>addEventListener("DOMContentLoaded",()=>(${probe.toString()})(${JSON.stringify(expected).replaceAll('<','\\u003c')}))</script></body>`);
+  const baseline=JSON.parse(fs.readFileSync(path.join(root,'_docs/data/karakusa-refinement-2026-10-28/baseline.json'),'utf8')).karakusa;
+  const referenceDataUrl='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'_references/Japanese/Karakusa.jpg')).toString('base64');
+  html=html.replace('</body>',`<script>addEventListener("DOMContentLoaded",()=>(${probe.toString()})(${JSON.stringify(expected).replaceAll('<','\\u003c')},${JSON.stringify(baseline).replaceAll('<','\\u003c')},${JSON.stringify(referenceDataUrl)}))</script></body>`);
   fs.writeFileSync(scratch,html,{flag:'wx'});
   const results=[];
   try {

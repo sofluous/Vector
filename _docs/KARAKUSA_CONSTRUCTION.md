@@ -77,7 +77,7 @@ From `_CODE`:
 
 ```powershell
 node --test _Vectors/tests/yagasuri.test.cjs _Vectors/tests/seigaiha.test.cjs _Vectors/tests/shippo.test.cjs _Vectors/tests/karakusa.test.cjs
-node _Vectors/tests/browser-karakusa.cjs --out _docs/data/karakusa-refinement-2026-10-28
+node _Vectors/tests/browser-workspace.cjs --out _docs/data/primary-entry-2026-10-29
 ```
 
 The combined Node suite has 28 passing tests. Karakusa checks cover graph attachment, periodic joins, knot interpolation, internal derivatives, closed leaf anchoring, exported control points, pruned versus unpruned coverage, immutable source/fresh outputs, supported sizes, invalid inputs, colors, unused controls, formula notes, JavaScript syntax, and the eight other generators' baseline outputs.
@@ -93,3 +93,5 @@ The reference metric uses the upper-left 278-by-179 image cell, white foreground
 The default motif markup grows from about 13.9 KB (v2) to 17.9 KB (v3), reflecting more fitted paths. In these headless sessions, 66 synchronous gallery rebuild samples per theme had medians of 10.8-14.0 ms and a maximum of 59.3 ms. These measurements exclude paint/frame latency and are not a controlled before/after benchmark. The future workspace should render only the selected pattern during editing.
 
 Final curve/palette review, non-Chromium behavior, external SVG-editor imports, native save/clipboard permissions, and comprehensive accessibility/theme acceptance remain open. Reference-image similarity has improved substantially, while exact tracing and historical authenticity are not claimed. Next work can separate the remaining generators and serialization contracts, then add reference presets before the workspace redesign.
+
+2026-10-29: The lab-specific browser runner is retired. The current workspace runner retains the reference-fit improvement check; earlier lab screenshots/counts are historical evidence.

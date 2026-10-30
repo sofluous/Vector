@@ -67,7 +67,7 @@ Exit: new collections fit existing contracts without special-case UI branches; a
 | Shareable parameter recipes | Reproduces variants without storing SVG blobs | After preset versioning |
 
 ## Recommended next task and review decisions
-[Workspace slice 3](WORKSPACE_INSPECTION.md) is implemented: Construction/Context content and centered Fit/zoom. Motif/Tile/Pattern views and view-specific exports are implemented. Continue visual/editor review using the consolidated review page. The workspace direction is user-endorsed. Construction content is transferred and inspection/export checks pass. Review the workflow and editor imports, then make it the primary entry before retiring the old galleries. Keep the product centered on grouped patterns and efficient contextual editing.
+[Workspace slice 3](WORKSPACE_INSPECTION.md) is implemented: Construction/Context content and centered Fit/zoom. Motif/Tile/Pattern views and view-specific exports are implemented. Continue visual/editor review using the consolidated review page. The workspace direction is user-endorsed. Construction content is transferred and inspection/export checks pass. The workspace is now the primary entry and old galleries are retired. External-editor imports and candidate visual acceptance remain open. Keep the product centered on grouped patterns and efficient contextual editing.
 
 Geometry priority: preserve ideal motifs AND authentic tessellation spacing/connections. Native repeat exports and Shift X/Y are implemented. Exact square export remains unresolved for incompatible lattices.
 
@@ -75,4 +75,26 @@ Restored [native tessellations and phase controls](TESSELLATION.md) after reject
 
 ## Inspection slice implemented - 2026-10-28
 
-Construction/Context tabs and centered Fit/zoom are implemented; see [inspection behavior](WORKSPACE_INSPECTION.md). Next: review the selected-pattern workflow and external-editor imports, then make the workspace the primary entry and retire the old galleries. Panning, lattice guides and new derivations remain proposals. Native tessellations and unresolved square-export constraints are unchanged.
+Construction/Context tabs and centered Fit/zoom are implemented; see [inspection behavior](WORKSPACE_INSPECTION.md). Primary-entry migration is complete. Next: candidate visual/editor acceptance and curated collection metadata. Panning, lattice guides and new derivations remain proposals. Native tessellations and unresolved square-export constraints are unchanged.
+
+## Primary workspace delivered - 2026-10-29
+
+`index.html` now opens the workspace. The separate workspace entry is removed; use `index.html` or the served project root. Legacy galleries and their lab-only browser runner are retired; reference-fit measurement moved to the current workspace browser suite. Native geometry, exports and the four construction explanations remain regression-protected.
+
+Near-term priorities: (1) review candidate variants and external SVG-editor round trips, (2) complete the five pending derivations and establish reference provenance, (3) evaluate transparent export and preview panning. Exact square export remains unresolved where it conflicts with native tessellation. No automatic historical/editor approval is inferred from the entry switch.
+
+## Small cleanup backlog - 2026-10-29
+
+| Candidate / proposed destination | Purpose and known consumers | Validation / decision |
+| --- | --- | --- |
+| `tests/` and `tests/fixtures/` - retain in place | Required Node regression suite and current Edge acceptance runner. Fixtures and historical SVG/JSON under `_docs/data/` are active test dependencies. | `node --test _Vectors/tests/*.test.cjs`; `node _Vectors/tests/browser-workspace.cjs --out _docs/data/primary-entry-2026-10-29`. Do not relocate based on folder name. |
+| Supporting topic docs at `_docs/*.md` -> `_docs/notes/` where historical/research-only | Many index, canonical and historical evidence links consume these paths. Current product decisions belong in the six canonical docs. | Future cohesive documentation pass: inventory every link and update index/consumers together. No moves in this task. |
+| Root `theme.css` and `css/{tokens,themes,components}.css` -> remove only after external-consumer review | Root theme imports these legacy split assets; current entries use bundled `design-system/theme.css`. They may remain external/theme-install entry points. | Deferred: inspect external links and DS installation history before deletion; then run Node/Edge resource and theme checks. |
+| `_references/Japanese/` - retain JPGs; investigate research-only extras separately | Context links and Node/browser tests consume the nine JPGs. Saved URLs and diagram PNGs are research inputs, with links in audit/construction documents. | No bulk move: inventory runtime versus research consumers before proposing `_docs/notes/` relocation for research-only inputs; verify Context links and Node/Edge after any future move. |
+| `_docs/data/` selected evidence and test fixtures - retain, review reproducible excess separately | Required tests read exact historical fixtures; screenshots/reports serve provenance. Generated HTML review pages are authored inspection artifacts. | Map actual consumers before any pruning; preserve test fixtures and selected evidence. No broad ignore or batch deletion. |
+
+Completed hygiene: removed broad `_docs/` ignore (documentation/evidence were already tracked), added a narrow root-only temporary browser-page ignore, and documented runtime delivery inputs separately from Git ignore rules. No configured build/packaging/CI pipeline was found. Unrelated CSS/reference files remain in place.
+
+## Single landing entry - 2026-10-29
+
+Removed the temporary `workspace.html` compatibility redirect at user request. `index.html` is the only app landing page. Runtime module names such as `workspace.js` and `css/workspace.css` describe the editing interface, not separate entry points. Tests and current instructions use the main landing directly. Historical entry-migration evidence remains dated history.

@@ -2,10 +2,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const patterns = require('../patterns/catalog.js').patterns;
 const seigaiha = patterns.find(pattern => pattern.id === 'seigaiha');
 const state = { line: '#2a5db1', accent: '#6f8dcb', bg: '#ffffff', stroke: 1.6, reps: 12, frame: 480 };
@@ -151,11 +149,8 @@ test('generators outside Seigaiha and later corrections retain their pre-Seigaih
   }
 });
 
-test('application scripts parse and formula notes describe the shipped construction', () => {
-  for (const match of source.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
-    if (match[1].trim()) new vm.Script(match[1]);
-  }
-  const notes = source.match(/data-formula-body="seigaiha">([\s\S]*?)<\/section>/)[1];
+test('formula notes describe the shipped construction', () => {
+  const notes = require('../patterns/content.js').get('seigaiha').construction;
   assert.match(notes, /Ring count stays fixed/);
   assert.match(notes, /background-filled outer fan/);
   assert.doesNotMatch(notes, /atan|Ring count scales/);

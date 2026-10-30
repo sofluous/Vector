@@ -157,3 +157,20 @@ Only Markdown changed. Validate links and consistency between current behavior, 
 - Visual inspection caught and corrected duplicate pattern IDs causing blank diagrams while the preview was hidden. The corrected mobile Construction diagram and desktop Preview/Context were reviewed. Detailed notes scroll within the content panel; preview and page overflow checks remain passing.
 - Evidence: [inspection results and screenshots](data/workspace-inspection-2026-10-28/README.md). Syntax and whitespace checks pass. No build/lint configuration exists.
 - Limitations: zoom is centered and relative to Fit; panning is not implemented. Five detailed derivations, reference provenance, final visual acceptance and external-editor import checks remain open. Existing native rectangular repeats and unresolved square-export constraints are unchanged.
+
+## 2026-10-29 - Promote primary workspace and retire galleries
+
+- Baseline: 61 Node tests passed before replacing entries. After migration, 63 tests pass, including actual entry resource existence/JavaScript parsing, absence of legacy galleries, redirect query/fragment preservation, and the transferred construction-note fixture. Native motif/field/export regressions remain covered.
+- Current Edge suite exercises the actual main entry through the old workspace bookmark before its instrumented checks. It retains current editing, tab/keyboard, responsive, zoom, export, invalid-input and shifted seam tests. Karakusa reference-fit measurement moved from the retired lab runner into this suite; reference accuracy is not inferred from historical naming.
+- The first attempt reached the former 30-second timeout during a slow run. Added bounded 90-second per-case timeout with stage diagnostics (and a 60-second probe deadline) to accommodate redirect loading, reference-fit measurement and captures; no correctness assertions were relaxed.
+- The primary navigation switch does not certify an external SVG editor. Editor import/save/reopen, final candidate visual approval, reference rights and non-Chromium behavior remain unverified. Square export remains constrained by exact native lattices.
+- No build/lint/CI/deployment configuration exists. Static entry asset/parse checks and the Node/Edge suites provide applicable validation. No deployment, commit or push was performed.
+
+- Final results: 63/63 Node tests and 9/9 Edge cases pass (195 checks each). [Primary-entry evidence](data/primary-entry-2026-10-29/README.md). Mobile main-entry and desktop Construction screenshots were visually reviewed. Reference-fit F1 remains 0.44 to 0.76. Entry resource parsing and whitespace checks pass.
+
+## 2026-10-29 - Single landing entry
+
+- Removed the separate entry and replaced redirect assertions with a regression check that `workspace.html` is absent. Browser smoke checks now open `index.html` directly with query/fragment preservation. The title identifies Vectors | Pattern Library.
+- 63 Node tests pass; no generator, export or editing behavior changed. [Direct landing browser evidence](data/single-landing-2026-10-29/README.md). Historical redirect results above describe the previous migration step.
+
+- Final single-entry validation: 63 Node tests pass; all nine direct-landing Edge cases pass with 195 checks each. Resource/script parsing and git diff --check pass.

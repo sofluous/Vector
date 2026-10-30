@@ -1,6 +1,8 @@
+> Current entry (2026-10-29): open `index.html`; the separate `workspace.html` entry has been removed. Legacy galleries are retired. Earlier opt-in/entry references below describe implementation history. External-editor acceptance remains pending.
+
 # Pattern workspace
 
-Updated 2026-10-28. Open `workspace.html` directly or use the workspace link in the existing lab. The workspace remains the new UI under development; the lab is a temporary entry/reference for construction notes.
+Updated 2026-10-28. Open `index.html` directly or serve the project root. The workspace remains the new UI under development; the lab is a temporary entry/reference for construction notes.
 
 ## Library organization
 
@@ -21,7 +23,7 @@ The workspace no longer links to the legacy galleries. The user has confirmed th
 
 ## Layout and Design System
 
-The [compact workspace refinement](COMPACT_WORKSPACE.md) replaces stacked descriptions with a single canvas toolbar, Info disclosure and status bar, and aligns property rows. `workspace.html` owns semantic structure and classic-script loading. `workspace.js` binds the session/capability model and library metadata to the DOM without duplicating generators. `css/workspace.css` consumes bundled Design System semantic colors, type and spacing tokens. Scoped range-thumb component tokens use the semantic accent for visibility. Artwork colors remain model data.
+The [compact workspace refinement](COMPACT_WORKSPACE.md) replaces stacked descriptions with a single canvas toolbar, Info disclosure and status bar, and aligns property rows. `index.html` owns semantic structure and classic-script loading. `workspace.js` binds the session/capability model and library metadata to the DOM without duplicating generators. `css/workspace.css` consumes bundled Design System semantic colors, type and spacing tokens. Scoped range-thumb component tokens use the semantic accent for visibility. Artwork colors remain model data.
 
 At desktop widths, library, stage and inspector occupy the viewport. At tablet widths Library starts collapsed; at phone widths both side panels start collapsed. Native disclosures expand in place with bounded content scrolling. The stage fits the current SVG without page/preview scrolling. See [current layout contract](COMPACT_WORKSPACE.md).
 

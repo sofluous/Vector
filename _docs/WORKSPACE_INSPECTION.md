@@ -1,6 +1,8 @@
+> Current entry (2026-10-29): open `index.html`; the separate `workspace.html` entry has been removed. Legacy galleries are retired. Earlier opt-in/entry references below describe implementation history. External-editor acceptance remains pending.
+
 # Workspace inspection
 
-Implemented 2026-10-28. Open `workspace.html`. This completes the Construction/Context and centered Fit/zoom portion of slice 3; Motif/Tile/Pattern and view-specific exports were already implemented.
+Implemented 2026-10-28. Open `index.html`. This completes the Construction/Context and centered Fit/zoom portion of slice 3; Motif/Tile/Pattern and view-specific exports were already implemented.
 
 Preview, Construction and Context use a compact tab bar. Arrow Left/Right wrap between tabs; Home/End select the first/last tab. Active tabs use roving tabindex, aria-selected and linked tabpanels. Selection, artwork, invalid drafts, preview mode and zoom survive tab changes. Selection updates both content panels. Detailed notes scroll inside the panel; the page remains fitted to the viewport. Preview export/view/zoom controls are hidden on content tabs.
 

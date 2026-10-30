@@ -1,3 +1,5 @@
+> Current entry (2026-10-29): open `index.html`; the separate `workspace.html` entry has been removed. Legacy galleries are retired. Earlier opt-in/entry references below describe implementation history. External-editor acceptance remains pending.
+
 # Selected-pattern workspace plan
 
 Status: staged implementation contract, 2026-10-28. Current geometry policy is [preserved native tessellations](TESSELLATION.md); older dated decisions below are historical. Generator modules, reference variants, and [slice 1 session/capability modules](WORKSPACE_SESSION.md) are implemented. [Slice 2 workspace UI](WORKSPACE_UI.md) is implemented as an opt-in separate page; the lab remains the default entry.

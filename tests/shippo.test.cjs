@@ -2,10 +2,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const patterns = require('../patterns/catalog.js').patterns;
 const shippo = patterns.find(pattern => pattern.id === 'shippo');
 const state = { line: '#2a5db1', accent: '#6f8dcb', bg: '#ffffff', stroke: 1.6, reps: 12, frame: 480 };
@@ -129,10 +127,9 @@ test('generators outside Shippo and the later Karakusa correction retain pre-Shi
   }
 });
 
-test('formula notes describe direct lenses and application JavaScript parses', () => {
-  const notes = source.match(/data-formula-body="shippo">([\s\S]*?)<\/section>/)[1];
+test('formula notes describe direct lenses', () => {
+  const notes = require('../patterns/content.js').get('shippo').construction;
   assert.match(notes, /do not rotate the tile/);
   assert.match(notes, /two minor circular arcs/);
   assert.doesNotMatch(notes, /previous accurate|rotate\(45/);
-  for (const match of source.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) if (match[1].trim()) new vm.Script(match[1]);
 });

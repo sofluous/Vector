@@ -1,6 +1,6 @@
 # Data Migration
 
-No saved user-preset format or migration mechanism is currently implemented. Generators and static records live in `index.html`; research files live in `_references/Japanese/`. SVG downloads are output artifacts, not application presets.
+No saved user-preset format or migration mechanism is currently implemented. Generators live in `patterns/`; research files live in `_references/Japanese/`. The primary workspace is `index.html`. SVG downloads are output artifacts, not application presets.
 
 ## Proposed compatibility rules
 - Preserve existing IDs during extraction; version generators when corrected geometry changes output.
@@ -60,3 +60,11 @@ The square arrangement experiment above was rejected. Tile/Pattern exports again
 ## Inspection tabs and zoom - 2026-10-28
 
 No artwork, SVG format or persisted data changes. Session tab/zoom settings already existed and now have UI bindings. Formula content is copied into the independent content module; the old lab remains temporarily for entry migration and source comparison.
+
+## 2026-10-29 - Primary entry migration
+
+The former `workspace.html` application markup now lives at `index.html`; runtime relative paths are unchanged because both entries share a directory. `workspace.html` redirects with query/fragment preservation and a no-script link fallback. The previous gallery/lab UI and its lab-only browser harness are retired. Four formula notes remain in `patterns/content.js`, protected by `tests/fixtures/construction-notes.json`. Legacy SVG serialization remains for required regression tests; existing downloaded SVGs and state contracts are unchanged. Reload still resets the editing session; no stored user-preset migration exists.
+
+## 2026-10-29 - Remove secondary entry
+
+The temporary `workspace.html` redirect is removed at user request. Use the served project root or `index.html`; old workspace bookmarks must be updated. No runtime modules, artwork contracts, presets or SVG formats changed. Earlier redirect notes above are historical.

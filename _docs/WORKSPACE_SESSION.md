@@ -1,3 +1,5 @@
+> Current entry (2026-10-29): open `index.html`; the separate `workspace.html` entry has been removed. Legacy galleries are retired. Earlier opt-in/entry references below describe implementation history. External-editor acceptance remains pending.
+
 # Workspace session model
 
 Implemented 2026-10-28: workspace plan slice 1. The current lab remains independent. These modules are now connected to [the opt-in workspace](WORKSPACE_UI.md), not loaded by `index.html`.
