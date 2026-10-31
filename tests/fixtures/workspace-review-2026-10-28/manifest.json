@@ -1,0 +1,79 @@
+{
+  "generated": "2026-10-28",
+  "state": {
+    "frame": 480,
+    "reps": 12,
+    "stroke": 1.6,
+    "line": "#2a5db1",
+    "accent": "#6f8dcb",
+    "bg": "#ffffff"
+  },
+  "records": [
+    {
+      "id": "asanoha",
+      "variant": "default",
+      "filename": "asanoha-default.svg",
+      "bytes": 19909
+    },
+    {
+      "id": "yagasuri",
+      "variant": "default",
+      "filename": "yagasuri-default.svg",
+      "bytes": 914
+    },
+    {
+      "id": "seigaiha",
+      "variant": "default",
+      "filename": "seigaiha-default.svg",
+      "bytes": 4579
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "default",
+      "filename": "ichimatsu-default.svg",
+      "bytes": 677
+    },
+    {
+      "id": "ichimatsu",
+      "variant": "reference",
+      "filename": "ichimatsu-reference.svg",
+      "bytes": 677
+    },
+    {
+      "id": "shippo",
+      "variant": "default",
+      "filename": "shippo-default.svg",
+      "bytes": 790
+    },
+    {
+      "id": "kikko",
+      "variant": "default",
+      "filename": "kikko-default.svg",
+      "bytes": 4540
+    },
+    {
+      "id": "karakusa",
+      "variant": "default",
+      "filename": "karakusa-default.svg",
+      "bytes": 18278
+    },
+    {
+      "id": "uroko",
+      "variant": "default",
+      "filename": "uroko-default.svg",
+      "bytes": 1612
+    },
+    {
+      "id": "mameshibori",
+      "variant": "default",
+      "filename": "mameshibori-default.svg",
+      "bytes": 4246
+    },
+    {
+      "id": "mameshibori",
+      "variant": "reference",
+      "filename": "mameshibori-reference.svg",
+      "bytes": 3432
+    }
+  ]
+}

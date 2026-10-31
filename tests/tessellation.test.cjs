@@ -31,7 +31,7 @@ test('shift edits are independent, validated atomically, and cleared by scoped r
 
 test('repeat fields exactly preserve the validated tessellation fixtures', () => {
   const fs = require('node:fs'), path = require('node:path');
-  const dir = path.join(__dirname, '../_docs/data/minimal-repeat-2026-10-28');
+  const dir = path.join(__dirname, './fixtures/minimal-repeat-2026-10-28');
   const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
   for (const record of manifest.records.filter(record => record.mode === 'field')) {
     const pattern = patterns.find(pattern => pattern.id === record.id);

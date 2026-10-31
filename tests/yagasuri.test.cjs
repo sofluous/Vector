@@ -100,7 +100,7 @@ test('invalid units fail explicitly', () => {
 });
 
 test('five untouched generators retain their original audit baseline', () => {
-  const baseline = JSON.parse(fs.readFileSync(path.join(root, '_docs/data/reference-audit-2026-10-28/baseline.json'), 'utf8'));
+  const baseline = JSON.parse(fs.readFileSync(path.join(root, 'tests/fixtures/reference-audit-2026-10-28/baseline.json'), 'utf8'));
   assert.equal(patterns.length, 9);
   for (const pattern of patterns.filter(pattern => !['yagasuri', 'seigaiha', 'shippo', 'karakusa'].includes(pattern.id))) {
     const previous = baseline[pattern.id];

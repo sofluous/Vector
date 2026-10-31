@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480">
+          <defs>
+            <pattern id="p_seigaiha_2" patternUnits="userSpaceOnUse" width="40" height="20">
+              <path d="M -60 0 A 20 20 0 0 1 -20 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -60 0 A 20 20 0 0 1 -20 0 M -55.2 0 A 15.2 15.2 0 0 1 -24.8 0 M -50.4 0 A 10.4 10.4 0 0 1 -29.6 0 M -45.6 0 A 5.6 5.6 0 0 1 -34.4 0" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -20 0 A 20 20 0 0 1 20 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -20 0 A 20 20 0 0 1 20 0 M -15.2 0 A 15.2 15.2 0 0 1 15.2 0 M -10.4 0 A 10.4 10.4 0 0 1 10.4 0 M -5.6 0 A 5.6 5.6 0 0 1 5.6 0" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 20 0 A 20 20 0 0 1 60 0 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 20 0 A 20 20 0 0 1 60 0 M 24.8 0 A 15.2 15.2 0 0 1 55.2 0 M 29.6 0 A 10.4 10.4 0 0 1 50.4 0 M 34.4 0 A 5.6 5.6 0 0 1 45.6 0" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -40 10 A 20 20 0 0 1 0 10 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -40 10 A 20 20 0 0 1 0 10 M -35.2 10 A 15.2 15.2 0 0 1 -4.8 10 M -30.4 10 A 10.4 10.4 0 0 1 -9.6 10 M -25.6 10 A 5.6 5.6 0 0 1 -14.4 10" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 0 10 A 20 20 0 0 1 40 10 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 0 10 A 20 20 0 0 1 40 10 M 4.8 10 A 15.2 15.2 0 0 1 35.2 10 M 9.6 10 A 10.4 10.4 0 0 1 30.4 10 M 14.4 10 A 5.6 5.6 0 0 1 25.6 10" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 40 10 A 20 20 0 0 1 80 10 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 40 10 A 20 20 0 0 1 80 10 M 44.8 10 A 15.2 15.2 0 0 1 75.2 10 M 49.6 10 A 10.4 10.4 0 0 1 70.4 10 M 54.4 10 A 5.6 5.6 0 0 1 65.6 10" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -60 20 A 20 20 0 0 1 -20 20 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -60 20 A 20 20 0 0 1 -20 20 M -55.2 20 A 15.2 15.2 0 0 1 -24.8 20 M -50.4 20 A 10.4 10.4 0 0 1 -29.6 20 M -45.6 20 A 5.6 5.6 0 0 1 -34.4 20" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -20 20 A 20 20 0 0 1 20 20 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -20 20 A 20 20 0 0 1 20 20 M -15.2 20 A 15.2 15.2 0 0 1 15.2 20 M -10.4 20 A 10.4 10.4 0 0 1 10.4 20 M -5.6 20 A 5.6 5.6 0 0 1 5.6 20" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 20 20 A 20 20 0 0 1 60 20 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 20 20 A 20 20 0 0 1 60 20 M 24.8 20 A 15.2 15.2 0 0 1 55.2 20 M 29.6 20 A 10.4 10.4 0 0 1 50.4 20 M 34.4 20 A 5.6 5.6 0 0 1 45.6 20" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -40 30 A 20 20 0 0 1 0 30 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -40 30 A 20 20 0 0 1 0 30 M -35.2 30 A 15.2 15.2 0 0 1 -4.8 30 M -30.4 30 A 10.4 10.4 0 0 1 -9.6 30 M -25.6 30 A 5.6 5.6 0 0 1 -14.4 30" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 0 30 A 20 20 0 0 1 40 30 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 0 30 A 20 20 0 0 1 40 30 M 4.8 30 A 15.2 15.2 0 0 1 35.2 30 M 9.6 30 A 10.4 10.4 0 0 1 30.4 30 M 14.4 30 A 5.6 5.6 0 0 1 25.6 30" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 40 30 A 20 20 0 0 1 80 30 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 40 30 A 20 20 0 0 1 80 30 M 44.8 30 A 15.2 15.2 0 0 1 75.2 30 M 49.6 30 A 10.4 10.4 0 0 1 70.4 30 M 54.4 30 A 5.6 5.6 0 0 1 65.6 30" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -60 40 A 20 20 0 0 1 -20 40 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -60 40 A 20 20 0 0 1 -20 40 M -55.2 40 A 15.2 15.2 0 0 1 -24.8 40 M -50.4 40 A 10.4 10.4 0 0 1 -29.6 40 M -45.6 40 A 5.6 5.6 0 0 1 -34.4 40" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M -20 40 A 20 20 0 0 1 20 40 Z" fill="#ffffff" stroke="none"/>
+                <path d="M -20 40 A 20 20 0 0 1 20 40 M -15.2 40 A 15.2 15.2 0 0 1 15.2 40 M -10.4 40 A 10.4 10.4 0 0 1 10.4 40 M -5.6 40 A 5.6 5.6 0 0 1 5.6 40" fill="none" stroke="#2a5db1" stroke-width="1.6"/><path d="M 20 40 A 20 20 0 0 1 60 40 Z" fill="#ffffff" stroke="none"/>
+                <path d="M 20 40 A 20 20 0 0 1 60 40 M 24.8 40 A 15.2 15.2 0 0 1 55.2 40 M 29.6 40 A 10.4 10.4 0 0 1 50.4 40 M 34.4 40 A 5.6 5.6 0 0 1 45.6 40" fill="none" stroke="#2a5db1" stroke-width="1.6"/>
+            </pattern>
+          </defs>
+          <rect width="480" height="480" fill="#ffffff"/>
+          <rect width="480" height="480" fill="url(#p_seigaiha_2)"/>
+        </svg>

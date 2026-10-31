@@ -358,8 +358,8 @@ async function run() {
   const scratch=path.join(root,`.workspace-qa-${process.pid}.html`);
   let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
   html=html.replace('<head>','<head><script>window.__probeErrors=[];addEventListener("error",e=>window.__probeErrors.push(e.message));addEventListener("unhandledrejection",e=>window.__probeErrors.push(String(e.reason)));</script>');
-  const expected=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root,'_docs/data/minimal-repeat-2026-10-28/manifest.json'),'utf8')).records.filter(record=>record.variant==='default'&&record.mode==='field').map(record=>[record.id,fs.readFileSync(path.join(root,'_docs/data/minimal-repeat-2026-10-28',record.filename),'utf8')]));
-  const baseline=JSON.parse(fs.readFileSync(path.join(root,'_docs/data/karakusa-refinement-2026-10-28/baseline.json'),'utf8')).karakusa;
+  const expected=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/minimal-repeat-2026-10-28/manifest.json'),'utf8')).records.filter(record=>record.variant==='default'&&record.mode==='field').map(record=>[record.id,fs.readFileSync(path.join(root,'tests/fixtures/minimal-repeat-2026-10-28',record.filename),'utf8')]));
+  const baseline=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/karakusa-refinement-2026-10-28/baseline.json'),'utf8')).karakusa;
   const referenceDataUrl='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'_references/Japanese/Karakusa.jpg')).toString('base64');
   html=html.replace('</body>',`<script>addEventListener("DOMContentLoaded",()=>(${probe.toString()})(${JSON.stringify(expected).replaceAll('<','\\u003c')},${JSON.stringify(baseline).replaceAll('<','\\u003c')},${JSON.stringify(referenceDataUrl)}))</script></body>`);
   fs.writeFileSync(scratch,html,{flag:'wx'});

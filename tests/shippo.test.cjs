@@ -120,7 +120,7 @@ test('invalid units fail explicitly', () => {
 });
 
 test('generators outside Shippo and the later Karakusa correction retain pre-Shippo output', () => {
-  const baseline = JSON.parse(fs.readFileSync(path.join(root, '_docs/data/shippo-2026-10-28/baseline.json'), 'utf8'));
+  const baseline = JSON.parse(fs.readFileSync(path.join(root, 'tests/fixtures/shippo-2026-10-28/baseline.json'), 'utf8'));
   for (const pattern of patterns.filter(pattern => !['shippo', 'karakusa'].includes(pattern.id))) {
     const before = baseline[pattern.id];
     assert.equal(JSON.stringify(pattern.tile(40, before.state)), JSON.stringify(before.tile), pattern.id);

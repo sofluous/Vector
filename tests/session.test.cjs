@@ -18,14 +18,14 @@ function exported(session) {
 
 test('new sessions preserve all nine frozen default export snapshots', () => {
   const session = model.create();
-  const manifest = require('../_docs/data/workspace-review-2026-10-28/manifest.json');
+  const manifest = require('./fixtures/workspace-review-2026-10-28/manifest.json');
   assert.equal(session.selectedId, 'asanoha');
   assert.equal(Object.keys(session.artwork).length, patterns.length);
   assert.ok(Object.isFrozen(session) && Object.isFrozen(session.artwork));
   for (const record of manifest.records) {
     let selected = model.select(session, record.id);
     if (record.variant !== 'default') selected = model.edit(selected, { variant: record.variant });
-    const snapshot = fs.readFileSync(path.join(__dirname, '../_docs/data/workspace-review-2026-10-28', record.filename), 'utf8');
+    const snapshot = fs.readFileSync(path.join(__dirname, './fixtures/workspace-review-2026-10-28', record.filename), 'utf8');
     assert.equal(exported(selected), snapshot);
     assert.ok(Object.isFrozen(selected.artwork[record.id]));
   }

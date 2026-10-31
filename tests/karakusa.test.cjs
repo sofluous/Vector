@@ -196,7 +196,7 @@ test('invalid inputs fail explicitly and all other generators retain the refinem
     assert.throws(()=>karakusa.tile(invalid,state),{name:'RangeError'});
     assert.throws(()=>karakusa.tile(40,{...state,stroke:invalid}),{name:'RangeError'});
   }
-  const baseline=JSON.parse(fs.readFileSync(path.join(root,'_docs/data/karakusa-refinement-2026-10-28/baseline.json'),'utf8'));
+  const baseline=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/karakusa-refinement-2026-10-28/baseline.json'),'utf8'));
   for(const p of patterns.filter(p=>p.id!=='karakusa'))assert.equal(JSON.stringify(p.tile(40,baseline[p.id].state)),JSON.stringify(baseline[p.id].tile),p.id);
 });
 

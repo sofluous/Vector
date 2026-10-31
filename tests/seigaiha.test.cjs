@@ -142,7 +142,7 @@ test('invalid units and strokes fail explicitly', () => {
 });
 
 test('generators outside Seigaiha and later corrections retain their pre-Seigaiha outputs', () => {
-  const baseline = JSON.parse(fs.readFileSync(path.join(root, '_docs/data/seigaiha-2026-10-28/baseline.json'), 'utf8'));
+  const baseline = JSON.parse(fs.readFileSync(path.join(root, 'tests/fixtures/seigaiha-2026-10-28/baseline.json'), 'utf8'));
   for (const pattern of patterns.filter(pattern => !['seigaiha', 'shippo', 'karakusa'].includes(pattern.id))) {
     const before = baseline[pattern.id];
     assert.equal(JSON.stringify(pattern.tile(40, before.state)), JSON.stringify(before.tile), pattern.id);

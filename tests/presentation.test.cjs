@@ -14,7 +14,7 @@ test('all patterns provide distinct bounded uncropped motif definitions', () => 
     assert.ok([motif.x, motif.y, motif.w, motif.h].every(Number.isFinite), pattern.id);
     assert.ok(motif.w > 0 && motif.h > 0 && motif.note.length > 0);
     const single = render(pattern, 0, { ...defaults, reps: 1 }, 'default', 'motif').svg;
-    const priorMotif = fs.readFileSync(path.join(__dirname, `../_docs/data/preview-modes-2026-10-28/${pattern.id}-default-motif.svg`), 'utf8');
+    const priorMotif = fs.readFileSync(path.join(__dirname, `./fixtures/preview-modes-2026-10-28/${pattern.id}-default-motif.svg`), 'utf8');
     assert.equal(single, priorMotif, `${pattern.id} motif remains unchanged`);
     assert.equal(single, render(pattern, 0, { ...defaults, reps: 36 }, 'default', 'motif').svg);
     assert.doesNotMatch(single, /<pattern|clipPath|NaN|Infinity/);
